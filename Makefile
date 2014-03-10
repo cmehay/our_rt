@@ -10,13 +10,12 @@
 #                                                                              #
 #******************************************************************************#
 
-.PHONY: all, clean, fclean, re
-
-HEADER = raytracer.h
-
 NAME = raytracer
-
-FCTS = main.c \
+SRCDIR = srcs/
+HEADDIR = srcs
+HEAD = raytracer.h
+HEADFILES = $(addprefix $(HEADDIR)/, $(HEAD))
+SRC =	main.c \
 		get_infos.c \
 		set_mlx.c \
 		raytracer.c \
@@ -26,27 +25,31 @@ FCTS = main.c \
 		draw_cone.c \
 		draw_cylinder.c
 
-OBJ = $(FCTS:.c=.o)
+OBJS = $(SRC:.c=.o)
+CC = clang
+CFLAGS = -g -Wall -Werror -Wextra
+LDFLAGS = -L libft/ -lft -L/usr/X11/lib -lXext -lX11 -lmlx -lm
+LIBFT = libft/libft.a
 
-FLAGS = -Wall -Wextra -Werror -g
+.PHONY: all, clean, fclean, re
 
-all: lib $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ)
-	 gcc $(FLAGS) -o $(NAME) $^ -L libft/ -lft -L/usr/X11/lib -lXext -lX11 -lmlx
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
 
-%.o: %.c
-	gcc $(FLAGS) -o $@ -c $< -I libft/includes/
+$(LIBFT):
+	$(MAKE) -C libft/
+
+%.o: %.c $(HEADERFILES)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	make -C libft/ clean
-	rm -f $(OBJ)
+	$(MAKE) -C libft/ $@
+	/bin/rm -f $(OBJS)
 
 fclean: clean
-	make -C libft/ fclean
-	rm -f $(NAME)
-
-lib:
-	make -C libft/
+	$(MAKE) -C libft/ $@
+	/bin/rm -f $(NAME)
 
 re: fclean all

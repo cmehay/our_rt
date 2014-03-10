@@ -18,10 +18,10 @@ t_data		*get_infos(int fd)
 	t_data	*list;
 
 	list = (t_data *)malloc(sizeof(*list));
-	gnl(fd, &line);
-	gnl(fd, &line);
+	get_next_line(fd, &line);
+	get_next_line(fd, &line);
 	list = init_list_with_cam(&list, line);
-	while (gnl(fd, &line) > 0)
+	while (get_next_line(fd, &line) > 0)
 		fill_list_with_obj(&list, line);
 	free(line);
 	return (list);
