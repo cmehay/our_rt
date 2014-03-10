@@ -3,28 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/27 19:41:58 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/12/01 19:48:58 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/21 12:50:30 by cmehay            #+#    #+#             */
+/*   Updated: 2013/11/21 13:50:12 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 void	*ft_memalloc(size_t size)
 {
+	char	*rtn;
 	size_t	i;
-	char	*result;
 
 	i = 0;
-	result = malloc(size);
-	if (result == NULL)
-		return (NULL);
-	while (i <= size)
+	if ((rtn = malloc(sizeof(char) * size)) != NULL)
 	{
-		result[i] = '\0';
-		i++;
+		while (i < size)
+			rtn[i++] = 0;
 	}
-	return (result);
+	return (rtn);
 }

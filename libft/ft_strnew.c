@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/27 20:04:30 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/12/08 22:38:04 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/21 14:01:54 by cmehay            #+#    #+#             */
+/*   Updated: 2014/02/11 11:46:15 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 char	*ft_strnew(size_t size)
 {
-	size_t	i;
-	char	*result;
+	char	*rtn;
 
-	i = 0;
-	result = (char*)malloc(sizeof(char) * size);
-	if (result == NULL)
-		return (NULL);
-	while (i <= size)
-	{
-		result[i] = '\0';
-		i++;
-	}
-	return (result);
+	rtn = (char*)ft_memalloc(sizeof(char) * (size + 1));
+	return (rtn);
+}
+
+
+char	*cool_strnew(size_t size)
+{
+	char	*rtn;
+
+	rtn = (char*)cool_malloc(sizeof(char) * (size + 1));
+	return (rtn);
 }

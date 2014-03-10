@@ -3,19 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/27 20:15:00 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/12/01 23:25:51 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/22 15:17:12 by cmehay            #+#    #+#             */
+/*   Updated: 2014/02/11 13:27:39 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 void	ft_memdel(void **ap)
 {
-	if (ap == NULL)
-		return ;
 	free(*ap);
+	*ap = NULL;
+}
+
+void	cool_memdel(void **ap)
+{
+	cool_free(*ap);
 	*ap = NULL;
 }

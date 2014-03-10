@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 16:50:53 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/11/26 17:09:48 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/19 16:04:34 by cmehay            #+#    #+#             */
+/*   Updated: 2013/11/21 11:09:27 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-int		ft_tolower(int c)
+int	ft_tolower(int c)
 {
-	if (c > 64 && c < 91)
-		c = c + 32;
+	if (c > 0x40 && c <= 0x5A)
+		return (c + 0x20);
 	return (c);
 }

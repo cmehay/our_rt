@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 15:25:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/12/01 23:34:20 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/22 14:59:37 by cmehay            #+#    #+#             */
+/*   Updated: 2013/11/23 13:46:01 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 char	*ft_strstr(const char *s1, const char *s2)
 {
-	int		i;
-	int		j;
+	size_t	s2_len;
 
-	i = 0;
-	j = ft_strlen(s2);
-	if (j == 0)
-		return ((char*)s1);
-	while (s1[i] != '\0')
+	s2_len = ft_strlen(s2);
+	if (s2_len == 0)
+		return ((char*) s1);
+	while (*s1 != 0)
 	{
-		if (ft_strncmp(s1 + i, s2, j) == 0)
-			return ((char*)(s1 + i));
-		i++;
+		if (ft_memcmp(s1, s2, s2_len) == 0)
+			return ((char*) s1);
+		s1++;
 	}
 	return (NULL);
 }

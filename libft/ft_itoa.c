@@ -3,56 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/28 18:39:11 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/12/05 01:56:59 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/20 10:10:23 by cmehay            #+#    #+#             */
+/*   Updated: 2014/03/08 09:53:19 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-static int		ft_len(int n)
+static char		*ft_initmem(int size, int64_t n)
 {
-	int		len;
+	char	*str;
 
-	len = 0;
-	if (n == 0)
-		len = 1;
 	if (n < 0)
-		len = len + 1;
-	while (n != 0)
-	{
-		n = n / 10;
-		len++;
-	}
-	return (len);
+		size++;
+	str = ft_strnew(size);
+	return (str);
 }
 
-char			*ft_itoa(int n)
+static char		*ft_charcat(char *s1, char c)
 {
-	int		len;
-	char	*result;
-	int		t;
+	int	i;
 
-	len = ft_len(n);
-	t = n;
-	result = (char*)malloc(sizeof(char) * len + 1);
-	if (result == NULL)
-		return (NULL);
-	if (t == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (t < 0)
+	i = 0;
+	while (s1[i])
+		i++;
+	s1[i] = c;
+	s1[i + 1] = 0;
+	return (s1);
+}
+
+static void		ft_itoa_cmp(int64_t n, char *str)
+{
+	uint64_t	usgn_copy;
+	int64_t		nb_size;
+	int64_t		nb_copy;
+	int64_t		nb_print;
+
+	if (n < 0)
+		ft_charcat(str, '-');
+	usgn_copy = n * ((n > 0) + (n > 0) - 1);
+	nb_size = 1;
+	nb_copy = usgn_copy;
+	while (nb_copy / 10 > 0)
 	{
-		result[0] = '-';
-		t = -t;
+		nb_size *= 10;
+		nb_copy /= 10;
 	}
-	else if (t == 0)
-		result[0] = 48;
-	while (t != 0)
+	while (nb_size > 0)
 	{
-		result[--len] = t % 10 + '0';
-		t = t / 10;
+		nb_print = 0;
+		nb_print = usgn_copy / nb_size;
+		ft_charcat(str, nb_print + '0');
+		usgn_copy = usgn_copy % nb_size;
+		nb_size = nb_size / 10;
 	}
-	return (result);
+}
+
+char			*ft_itoa(int64_t n)
+{
+	uint64_t	usgn_cp;
+	int64_t		nb_size;
+	char		*rtn;
+
+	usgn_cp = n * ((n > 0) + (n > 0) - 1);
+	nb_size = 1;
+	while (usgn_cp / 10 > 0)
+	{
+		usgn_cp /= 10;
+		nb_size++;
+	}
+	if ((rtn = ft_initmem(nb_size, n)) != NULL)
+		ft_itoa_cmp(n, rtn);
+	return (rtn);
 }

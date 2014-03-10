@@ -3,19 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/27 20:27:29 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/12/08 19:19:52 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/22 15:18:31 by cmehay            #+#    #+#             */
+/*   Updated: 2014/02/11 11:57:08 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 void	ft_strdel(char **as)
 {
-	if (as == NULL || *as == NULL)
-		return ;
 	free(*as);
+	*as = NULL;
+}
+
+void	cool_strdel(char **as)
+{
+	cool_free(*as);
 	*as = NULL;
 }

@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 11:40:05 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/12/05 01:56:06 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/21 07:22:17 by cmehay            #+#    #+#             */
+/*   Updated: 2013/11/21 09:27:44 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-int		ft_isascii(int c)
+int	ft_isascii(int c)
 {
-	if (c >= 0 && c < 128)
+	if (c >= 0x00 && c <= 0x7F)
 		return (1);
-	else
-		return (0);
+	return (0);
 }

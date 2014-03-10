@@ -3,29 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/23 13:18:04 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/12/01 23:29:08 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/22 14:44:59 by cmehay            #+#    #+#             */
+/*   Updated: 2013/11/22 15:50:26 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
-	char	*copy;
+	size_t	i;
 
-	i = 0;
-	copy = (char *) s;
-	while (s[i] != '\0')
-	{
-		if (s[i] == (char) c)
-		return (&copy[i]);
-	i++;
-	}
-	if (copy[i] == '\0' && c == '\0')
-		return (&(copy[i]));
-	return (NULL);
+	i = ft_strlen(s);
+	return (ft_memchr(s, (char) c, i + 1));
 }

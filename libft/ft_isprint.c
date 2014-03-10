@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 17:23:20 by sde-segu          #+#    #+#             */
-/*   Updated: 2013/12/05 01:56:45 by sde-segu         ###   ########.fr       */
+/*   Created: 2013/11/21 07:22:17 by cmehay            #+#    #+#             */
+/*   Updated: 2013/11/21 09:53:22 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
-	if (c > 31 && c < 127)
+	if (c >= 0x20 && c <= 0x7E)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
