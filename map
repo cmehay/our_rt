@@ -16,4 +16,3 @@ plan    0 0 1 20         0 0 250      0 0 0
 
 { light: -x(back) x=0 middle +x(front) y(right/left) z(up/down) radius(small/big) light  180 -200 -98 0     0 0 0      0 0 0}
 light 60 0 90 5 10 0 0 0 0 0
-light 60 0 -60 5 10 0 0 0 0 0

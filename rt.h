@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/10 23:52:08 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/11 00:01:57 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
-# define HEIGHT 900
-# define WIDTH 1800
+# define HEIGHT 400
+# define WIDTH 600
 
 typedef struct		s_data
 {
