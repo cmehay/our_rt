@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   set_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/21 14:01:54 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/12 14:17:26 by cmehay           ###   ########.fr       */
+/*   Created: 2014/03/12 17:16:50 by cmehay            #+#    #+#             */
+/*   Updated: 2014/03/12 18:09:36 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rt.h"
 
-char	*ft_strnew(size_t size)
+t_env	*set_env(void)
 {
-	char	*rtn;
-
-	rtn = (char*)ft_memalloc(sizeof(char) * (size + 1));
-	return (rtn);
-}
-
-char	*cool_strnew(size_t size)
-{
-	char	*rtn;
-
-	rtn = (char*)cool_malloc(sizeof(char) * (size + 1));
-	return (rtn);
+	
 }

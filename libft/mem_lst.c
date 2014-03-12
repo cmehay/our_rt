@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/29 11:23:20 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/08 10:32:06 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/12 15:02:13 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,15 @@ void				cool_free(void *ptr)
 	t_alloc_lst	*lst;
 	t_alloc_lst	*prev;
 
+	prev = NULL;
 	lst = gimme_ptr_lst(FALSE);
 	while (lst->next)
 	{
 		if (lst->ptr == (ssize_t)ptr)
 		{
 			free(ptr);
-			prev->next = lst->next;
+			if (prev)
+				prev->next = lst->next;
 			free(lst);
 			return ;
 		}
@@ -81,7 +83,8 @@ void				cool_free(void *ptr)
 	if (lst->ptr == (ssize_t)ptr)
 	{
 		free(ptr);
-		prev->next = NULL;
+		if (prev)
+			prev->next = NULL;
 		free(lst);
 	}
 }

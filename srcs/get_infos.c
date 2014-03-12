@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_infos.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <sde-segu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:13:36 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/02/25 07:13:37 by sde-segu         ###   ########.fr       */
+/*   Updated: 2014/03/12 18:09:43 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int		fill_list_with_obj(t_data **list, char *line)
 		i++;
 	if (i != 11)
 		return (-1);
-	tmp = (t_data *)malloc(sizeof(*tmp));
 	obj = (t_data *)malloc(sizeof(*obj));
 	obj = collect_info_about_obj(obj, tab);
 	tmp = *list;

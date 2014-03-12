@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/11 00:01:57 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/12 18:09:35 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 # define HEIGHT 400
 # define WIDTH 600
@@ -39,52 +39,72 @@ typedef struct		s_data
 	struct s_data	*next;
 }					t_data;
 
+typedef struct	s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*data;
+	int		endian;
+	int		bpp;
+}				t_mlx;
+
+typedef struct	s_screen
+{
+	float	screen_length;
+	float	screen_width;
+	float	screen_height;
+	float	screen_rayon;
+}				t_screen;
+
+typedef struct	s_pos
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_pos;
+
+typedef struct	s_color
+{
+	int	red;
+	int	green;
+	int	blue;
+}				t_color;
+
+typedef struct	s_ray
+{
+	int		line;
+	float	go_w;
+	float	go_h;
+	float	inter;
+	float	inter_light;
+	float	len;
+	float	delta;
+	float	delta_light;
+}				t_ray;
+
 typedef struct		s_env
 {
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*data;
-	int				endian;
-	int				bpp;
-	int				line;
-	float			go_w;
-	float			go_h;
-	float			inter;
-	float			inter_light;
-	float			len;
-	float			screen_length;
-	float			screen_width;
-	float			screen_height;
-	float			screen_rayon;
-	float			delta;
-	float			delta_light;
-	float			x;
-	float			y;
-	float			z;
-	float			cam_x;
-	float			cam_y;
-	float			cam_z;
-	float			normale_x;
-	float			normale_y;
-	float			normale_z;
-	float			vect_x;
-	float			vect_y;
-	float			vect_z;
-	float			shadowray_x;
-	float			shadowray_y;
-	float			shadowray_z;
-	int				red;
-	int				green;
-	int				blue;
-	int				object;
+	t_mlx		*mlx;
+	t_screen	*screen;
+
 	float			a;
 	float			b;
 	float			c;
-	float			interx;
-	float			intery;
-	float			interz;
+
+	t_pos			pos;
+	t_pos			cam;
+	t_pos			normal;
+	t_pos			vect;
+	t_pos			shadowray;
+	t_pos			inter;
+	t_color			color;
+
+	int				object;
+
+
 	float			lenght;
+
 	float			heart_sphere[3];
 	float			heart_plan[4];
 	float			angle[3];

@@ -11,10 +11,11 @@
 #******************************************************************************#
 
 NAME = raytracer
-SRCDIR = srcs/
+SRCDIR = srcs
 HEADDIR = srcs
 HEAD = raytracer.h
 HEADFILES = $(addprefix $(HEADDIR)/, $(HEAD))
+SCRFILES = $(addprefix $(SRCDIR)/, $(SRC))
 SRC =	main.c \
 		get_infos.c \
 		set_mlx.c \
@@ -25,7 +26,7 @@ SRC =	main.c \
 		draw_cone.c \
 		draw_cylinder.c
 
-OBJS = $(SRC:.c=.o)
+OBJS = $(SCRFILES:.c=.o)
 CC = clang
 CFLAGS = -g -Wall -Werror -Wextra
 LDFLAGS = -L libft/ -lft -L/usr/X11/lib -lXext -lX11 -lmlx -lm

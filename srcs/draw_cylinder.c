@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_cylinder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <sde-segu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/02 03:09:23 by sde-segu         ###   ########.fr       */
+/*   Updated: 2014/03/12 18:09:41 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	lightcylinder(t_env *e)
 	e->normale_y = y / len;
 	e->normale_z = z / len;
 	scal = (e->normale_x * e->shadowray_x + e->normale_y * e->shadowray_y
-				+ e->normale_z * e->shadowray_z);
+		 + e->normale_z * e->shadowray_z);
 	scal = (scal < 0.2) ? 0.2 : scal;
 	e->red *= scal;
 	e->green *= scal;
