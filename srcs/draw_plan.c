@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/01 02:13:06 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/13 15:59:18 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/13 16:08:54 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int		rt_plan(t_env *e, t_data *scene)
 	x = e->cam.x;
 	y = e->cam.y;
 	z = e->cam.z;
-	inter = -((scene->pos.x * x + scene->pos.y * y + scene->pos.z * z + scene->radius)
-	/ (scene->pos.x * e->vect.x + scene->pos.y * e->vect.y + scene->pos.z * e->vect.z));
+	inter = -((scene->pos.x * x + scene->pos.y * y + scene->pos.z * z
+		+ scene->radius) / (scene->pos.x * e->vect.x + scene->pos.y * e->vect.y
+		+ scene->pos.z * e->vect.z));
 	if (((e->ray.inter == -1) || (inter < e->ray.inter)) && inter > 0.01)
 	{
 		e->ray.inter = inter;
@@ -63,9 +64,9 @@ void	size_light_on_plan(t_env *e, t_data *scene)
 	x = e->inter.x;
 	y = e->inter.y;
 	z = e->inter.z;
-	inter = -((scene->pos.x * x + scene->pos.y * y + scene->pos.z * z + scene->radius)
-		/ (scene->pos.x * e->shadowray.x + scene->pos.y * e->shadowray.y
-			+ scene->pos.z * e->shadowray.z));
+	inter = -((scene->pos.x * x + scene->pos.y * y + scene->pos.z * z
+		+ scene->radius) / (scene->pos.x * e->shadowray.x
+		+ scene->pos.y * e->shadowray.y + scene->pos.z * e->shadowray.z));
 	if (inter > 4 && (inter < e->screen.length))
 	{
 		if (e->color.red > 20)
