@@ -24,7 +24,8 @@ SRC =	main.c \
 		draw_sphere.c \
 		draw_plan.c \
 		draw_cone.c \
-		draw_cylinder.c
+		draw_cylinder.c \
+		utils.c
 
 OBJS = $(SCRFILES:.c=.o)
 CC = clang

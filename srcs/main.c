@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-segu <sde-segu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:08:57 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/02/25 07:08:57 by sde-segu         ###   ########.fr       */
+/*   Updated: 2014/03/13 15:19:32 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		main(int argc, char **argv)
 	t_env	*e;
 	int		fd;
 
-	e = (t_env *)malloc(sizeof(t_env));
+	e = (t_env *)safe_malloc(sizeof(t_env));
 	if (argc == 1)
 		ft_putstr("enter a scene\n");
 	if (argc == 2)
@@ -28,9 +28,9 @@ int		main(int argc, char **argv)
 			scene = get_infos(fd);
 			set_mlx(e, scene);
 			raytracer(e, &scene);
-			mlx_key_hook(e->win, key_hook, e);
-			mlx_expose_hook(e->win, expose_hook, e);
-			mlx_loop(e->mlx);
+			mlx_key_hook(e->mlx->win, key_hook, e);
+			mlx_expose_hook(e->mlx->win, expose_hook, e);
+			mlx_loop(e->mlx->mlx);
 		}
 	}
 	return (0);

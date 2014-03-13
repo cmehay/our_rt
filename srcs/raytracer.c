@@ -16,43 +16,43 @@ int		raytracer(t_env *e, t_data **scene)
 {
 	int		color;
 
-	e->go_h = -HEIGHT / 2;
-	while (e->go_h < HEIGHT / 2)
+	e->ray.go_h = -HEIGHT / 2;
+	while (e->ray.go_h < HEIGHT / 2)
 	{
-		e->go_w = -WIDTH / 2;
-		while (e->go_w < WIDTH / 2)
+		e->ray.go_w = -WIDTH / 2;
+		while (e->ray.go_w < WIDTH / 2)
 		{
 			size_ray(e);
 			id_object(e, *scene);
-			if (e->red != 0 || e->green != 0 || e->blue != 0)
+			if (e->color.red != 0 || e->color.green != 0 || e->color.blue != 0)
 				check_light(e, scene);
-			color = (e->red * 256 * 256) + (e->green * 256) + e->blue;
-			mlx_put_px_img(e, e->go_w + WIDTH / 2, e->go_h + HEIGHT / 2, color);
-			e->go_w++;
+			color = (e->color.red * 256 * 256) + (e->color.green * 256) + e->color.blue;
+			mlx_put_px_img(e, e->ray.go_w + WIDTH / 2, e->ray.go_h + HEIGHT / 2, color);
+			e->ray.go_w++;
 		}
-		e->go_h++;
+		e->ray.go_h++;
 	}
 	return (0);
 }
 
 int		size_ray(t_env *e)
 {
-	e->x = e->screen_length;
-	e->y = e->screen_width * e->go_w / WIDTH;
-	e->z = e->screen_height * e->go_h / HEIGHT;
-	e->len = sqrt(e->x * e->x + e->y * e->y + e->z * e->z);
-	e->vect_x = e->x / e->len;
-	e->vect_y = e->y / e->len;
-	e->vect_z = -e->z / e->len;
+	e->pos.x = e->screen.length;
+	e->pos.y = e->screen.width * e->ray.go_w / WIDTH;
+	e->pos.z = e->screen.height * e->ray.go_h / HEIGHT;
+	e->ray.len = sqrt(e->pos.x * e->pos.x + e->pos.y * e->pos.y + e->pos.z * e->pos.z);
+	e->vect.x = e->pos.x / e->ray.len;
+	e->vect.y = e->pos.y / e->ray.len;
+	e->vect.z = -e->pos.z / e->ray.len;
 	return (0);
 }
 
 int		id_object(t_env *e, t_data *scene)
 {
-	e->inter = -1;
-	e->red = 0;
-	e->green = 0;
-	e->blue = 0;
+	e->ray.inter = -1;
+	e->color.red = 0;
+	e->color.green = 0;
+	e->color.blue = 0;
 	e->object = 0;
 	while (scene)
 	{

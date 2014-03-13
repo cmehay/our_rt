@@ -17,9 +17,9 @@ int		check_light(t_env *e, t_data **scene)
 	t_data	*tmp;
 
 	tmp = *scene;
-	e->interx = e->cam_x + (e->vect_x * e->inter);
-	e->intery = e->cam_y + (e->vect_y * e->inter);
-	e->interz = e->cam_z + (e->vect_z * e->inter);
+	e->inter.x = e->cam.x + (e->vect.x * e->ray.inter);
+	e->inter.y = e->cam.y + (e->vect.y * e->ray.inter);
+	e->inter.z = e->cam.z + (e->vect.z * e->ray.inter);
 	while (tmp)
 	{
 		tmp = tmp->next;
@@ -39,14 +39,14 @@ void	size_raylight(t_env *e, t_data *scene)
 	float	y;
 	float	z;
 
-	x = scene->x - e->interx;
-	y = scene->y - e->intery;
-	z = scene->z - e->interz;
+	x = scene->pos.x - e->inter.x;
+	y = scene->pos.y - e->inter.y;
+	z = scene->pos.z - e->inter.z;
 	len = sqrt(x * x + y * y + z * z);
-	e->len = len;
-	e->shadowray_x = x / len;
-	e->shadowray_y = y / len;
-	e->shadowray_z = z / len;
+	e->ray.len = len;
+	e->shadowray.x = x / len;
+	e->shadowray.y = y / len;
+	e->shadowray.z = z / len;
 }
 
 void	id_object_for_light(t_env *e, t_data **scene)
@@ -54,7 +54,7 @@ void	id_object_for_light(t_env *e, t_data **scene)
 	t_data	*tmp;
 
 	tmp = *scene;
-	e->inter_light = -1;
+	e->ray.inter_light = -1;
 	if (e->object == 1)
 		lightsphere(e);
 	if (e->object == 2)

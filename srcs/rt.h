@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/12 18:09:35 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/13 16:01:39 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,6 @@
 # define HEIGHT 400
 # define WIDTH 600
 
-typedef struct		s_data
-{
-	char			*what;
-	float			x;
-	float			y;
-	float			z;
-	int				angle_x;
-	int				angle_y;
-	int				angle_z;
-	float			radius;
-	float			vectx;
-	float			vecty;
-	float			vectz;
-	int				rgb[3];
-	struct s_data	*next;
-}					t_data;
-
 typedef struct	s_mlx
 {
 	void	*mlx;
@@ -46,15 +29,16 @@ typedef struct	s_mlx
 	void	*img;
 	char	*data;
 	int		endian;
+	int		line;
 	int		bpp;
 }				t_mlx;
 
 typedef struct	s_screen
 {
-	float	screen_length;
-	float	screen_width;
-	float	screen_height;
-	float	screen_rayon;
+	float	length;
+	float	width;
+	float	height;
+	float	rayon;
 }				t_screen;
 
 typedef struct	s_pos
@@ -83,32 +67,40 @@ typedef struct	s_ray
 	float	delta_light;
 }				t_ray;
 
-typedef struct		s_env
+typedef struct s_data	t_data;
+
+struct	s_data
+{
+	char	*what;
+	t_pos	pos;
+	t_pos	angle;
+	float	radius;
+	t_pos	vect;
+	int		rgb[3];
+	t_data	*next;
+};
+
+typedef struct	s_env
 {
 	t_mlx		*mlx;
-	t_screen	*screen;
-
-	float			a;
-	float			b;
-	float			c;
-
-	t_pos			pos;
-	t_pos			cam;
-	t_pos			normal;
-	t_pos			vect;
-	t_pos			shadowray;
-	t_pos			inter;
-	t_color			color;
-
-	int				object;
-
-
-	float			lenght;
-
-	float			heart_sphere[3];
-	float			heart_plan[4];
-	float			angle[3];
-}					t_env;
+	t_screen	screen;
+	t_ray		ray;
+	t_pos		pos;
+	t_pos		cam;
+	t_pos		normal;
+	t_pos		vect;
+	t_pos		shadowray;
+	t_pos		inter;
+	t_color		color;
+	int			object;
+	float		a;
+	float		b;
+	float		c;
+	float		lenght;
+	float		heart_sphere[3];
+	float		heart_plan[4];
+	float		angle[3];
+}				t_env;
 
 t_data	*get_infos(int fd);
 t_data	*init_list_with_cam(t_data **list, char *line);
@@ -146,5 +138,8 @@ void	rt_cylinder(t_env *e, t_data *scene);
 int		get_cyl_to_print(t_env *e, t_data *scene);
 void	lightcylinder(t_env *e);
 void	size_light_on_cyl(t_env *e, t_data *scene);
+
+void	*safe_malloc(size_t size);
+
 
 #endif /* !RT_H */
