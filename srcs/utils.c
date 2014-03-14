@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-void	*safe_malloc(size_t size)
+void	*malloc(size_t size)
 {
 	void	*rtn;
 

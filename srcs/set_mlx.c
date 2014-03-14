@@ -14,7 +14,7 @@
 
 int		set_mlx(t_env *e, t_data *scene)
 {
-	e->mlx = (t_mlx*)safe_malloc(sizeof(t_mlx));
+	e->mlx = (t_mlx*)malloc(sizeof(t_mlx));
 	e->mlx->mlx = mlx_init();
 	e->mlx->win = mlx_new_window(e->mlx->mlx, WIDTH, HEIGHT, "raytracer");
 	e->mlx->img = mlx_new_image(e->mlx->mlx, WIDTH, HEIGHT);

@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:13:36 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/12 18:09:43 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/14 13:53:06 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ t_data		*get_infos(int fd)
 	char	*line;
 	t_data	*list;
 
-	list = (t_data *)safe_malloc(sizeof(*list));
-	get_next_line(fd, &line);
-	get_next_line(fd, &line);
+	list = (t_data *)malloc(sizeof(*list));
+	cool_next_line(fd, &line);
+	cool_next_line(fd, &line);
 	list = init_list_with_cam(&list, line);
-	while (get_next_line(fd, &line) > 0)
+	while (cool_next_line(fd, &line) > 0)
 		fill_list_with_obj(&list, line);
 	cool_free(line);
 	return (list);
@@ -32,7 +32,7 @@ t_data		*init_list_with_cam(t_data **list, char *line)
 	char	**tab;
 	t_data	*cam;
 
-	cam = (t_data *)safe_malloc(sizeof(*list));
+	cam = (t_data *)malloc(sizeof(*list));
 	tab = ft_strsplit(line, ' ');
 	cam->pos.x = ft_atoi(tab[1]);
 	cam->pos.y = ft_atoi(tab[2]);
@@ -60,7 +60,7 @@ int		fill_list_with_obj(t_data **list, char *line)
 		i++;
 	if (i != 11)
 		return (-1);
-	obj = (t_data *)safe_malloc(sizeof(*obj));
+	obj = (t_data *)malloc(sizeof(*obj));
 	obj = collect_info_about_obj(obj, tab);
 	tmp = *list;
 	if (tmp)

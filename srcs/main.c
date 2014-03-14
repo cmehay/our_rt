@@ -18,7 +18,7 @@ int		main(int argc, char **argv)
 	t_env	*e;
 	int		fd;
 
-	e = (t_env *)safe_malloc(sizeof(t_env));
+	e = (t_env *)malloc(sizeof(t_env));
 	if (argc == 1)
 		ft_putstr("enter a scene\n");
 	if (argc == 2)

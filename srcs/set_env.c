@@ -17,6 +17,6 @@ t_env	*set_env(void)
 	static t_env	*env;
 
 	if (!env)
-		env = (t_env*)safe_malloc(sizeof(t_env));
+		env = (t_env*)malloc(sizeof(t_env));
 	return (env);
 }

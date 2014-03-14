@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/29 11:23:20 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/12 15:02:13 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/14 14:09:22 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_alloc_lst	*gimme_ptr_lst(t_bool reset)
 		return ((lst = NULL));
 	if (!lst)
 	{
-		lst = (t_alloc_lst*)malloc(sizeof(t_alloc_lst));
+		lst = (t_alloc_lst*)ft_memalloc(sizeof(t_alloc_lst));
 		lst->ptr = -1;
 		lst->next = NULL;
 	}
@@ -35,13 +35,14 @@ void				add_to_lst(void *ptr)
 	t_alloc_lst	*new_item;
 	t_alloc_lst	*current_lst;
 
-	new_item = (t_alloc_lst*)malloc(sizeof(t_alloc_lst));
+	new_item = (t_alloc_lst*)ft_memalloc(sizeof(t_alloc_lst));
 	new_item->ptr = (ssize_t)ptr;
 	new_item->next = NULL;
 	current_lst = gimme_ptr_lst(FALSE);
-	while (current_lst->next)
+	while (current_lst && current_lst->next)
 		current_lst = current_lst->next;
-	current_lst->next = new_item;
+	if (current_lst)
+		current_lst->next = new_item;
 }
 
 /*
