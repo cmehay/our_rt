@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 16:05:29 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/12 18:04:01 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/14 14:24:45 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 /*
 ** mem_lst.c
 */
-void	add_to_lst(void *ptr);
+t_bool	add_to_lst(void *ptr);
 void	*cool_malloc(size_t len);
 void	cool_free(void *ptr);
 void	free_for_all(t_alloc_lst *lst);

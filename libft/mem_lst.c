@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/29 11:23:20 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/12 15:02:13 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/14 14:24:49 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,22 @@ static t_alloc_lst	*gimme_ptr_lst(t_bool reset)
 /*
 ** This function adds a pointer address to the list.
 */
-void				add_to_lst(void *ptr)
+t_bool				add_to_lst(void *ptr)
 {
 	t_alloc_lst	*new_item;
 	t_alloc_lst	*current_lst;
 
-	new_item = (t_alloc_lst*)malloc(sizeof(t_alloc_lst));
+	if (!(new_item = (t_alloc_lst*)malloc(sizeof(t_alloc_lst))))
+		return (FALSE);
 	new_item->ptr = (ssize_t)ptr;
 	new_item->next = NULL;
 	current_lst = gimme_ptr_lst(FALSE);
+	if (!current_lst)
+		return (FALSE);
 	while (current_lst->next)
 		current_lst = current_lst->next;
 	current_lst->next = new_item;
+	return (TRUE);
 }
 
 /*
@@ -53,7 +57,11 @@ void				*cool_malloc(size_t len)
 
 	if (!(alloc = ft_memalloc(len)))
 		return (alloc);
-	add_to_lst(alloc);
+	if (!add_to_lst(alloc))
+	{
+		free(alloc);
+		return (NULL);
+	}
 	return (alloc);
 }
 

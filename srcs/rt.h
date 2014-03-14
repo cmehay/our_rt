@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/13 16:01:39 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/14 14:49:12 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct	s_env
 }				t_env;
 
 t_data	*get_infos(int fd);
-t_data	*init_list_with_cam(t_data **list, char *line);
+t_data	*init_list_with_cam(char *line);
 t_data	*collect_info_about_obj(t_data *node, char **tab);
 int		fill_list_with_obj(t_data **list, char *line);
 
