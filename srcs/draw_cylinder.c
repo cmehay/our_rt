@@ -6,19 +6,56 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/12 18:09:41 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/15 17:21:16 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <stdio.h>
 
 void	rt_cylinder(t_env *e, t_data *scene)
 {
-	e->a = pow((e->vect.x), 2) + pow((e->vect.y), 2);
-	e->b = 2 * ((e->vect.x) * (e->cam.x - scene->pos.x)
-		+ e->vect.y * (e->cam.y - scene->pos.y));
-	e->c = pow((e->cam.x - scene->pos.x), 2)
-		+ pow((e->cam.y - scene->pos.y), 2) - pow(scene->radius, 2);
+	float	mem;
+	float	vx;
+	float	vz;
+	float	vy;
+	float	ox;
+	float	oz;
+	float	oy;
+
+	ox = e->cam.x - scene->pos.x;
+	oz = e->cam.z - scene->pos.z;
+	oy = e->cam.y - scene->pos.y;
+	vx = e->vect.x;
+	vz = e->vect.z;
+	vy = e->vect.y;
+
+	if (scene->angle.y)
+	{
+		mem = e->vect.x;
+		vx = cos(scene->angle.y * M_PI / 180) * mem - sin(scene->angle.y * M_PI / 180) * e->vect.z;
+		vz = sin(scene->angle.y * M_PI / 180) * mem + cos(scene->angle.y * M_PI / 180) * e->vect.z;
+		mem = ox;
+		ox = cos(scene->angle.y * M_PI / 180) * mem - sin(scene->angle.y * M_PI / 180) * oz;
+		oz = sin(scene->angle.y * M_PI / 180) * mem + cos(scene->angle.y * M_PI / 180) * oz;
+	}
+	if (scene->angle.x)
+	{
+		mem = vy;
+		vy = cos(scene->angle.x * M_PI / 180) * mem + sin(scene->angle.x * M_PI / 180) * vz;
+		vz = sin(scene->angle.x * M_PI / 180) * mem * -1 + cos(scene->angle.x * M_PI / 180) * vz;
+		mem = oy;
+		oy = cos(scene->angle.x * M_PI / 180) * mem + sin(scene->angle.x * M_PI / 180) * oz;
+		oz = sin(scene->angle.x * M_PI / 180) * mem * -1 + cos(scene->angle.x * M_PI / 180) * oz;
+	}
+	ox = scene->pos.x + ox;
+	oy = scene->pos.y + oy;
+	oz = scene->pos.z + oz;
+	e->a = pow((vx), 2) + pow((vy), 2);
+	e->b = 2 * ((vx) * (ox - scene->pos.x)
+		+ vy * (oy - scene->pos.y));
+	e->c = pow((ox - scene->pos.x), 2)
+		+ pow((oy - scene->pos.y), 2) - pow(scene->radius, 2);
 	e->ray.delta = pow(e->b, 2) - (4 * e->a * e->c);
 	get_cyl_to_print(e, scene);
 }
@@ -34,8 +71,10 @@ int		get_cyl_to_print(t_env *e, t_data *scene)
 		: fmax(inter1, inter2);
 	if (((e->ray.inter == -1) || e->ray.inter > inter2) && inter2 > 0.01)
 	{
-		e->ray.inter = inter1;
+		e->ray.inter = inter2;
 		e->object = 3;
+		e->heart_sphere[0] = scene->pos.x;
+		e->heart_sphere[1] = scene->pos.y;
 		e->color.red = scene->rgb[0];
 		e->color.green = scene->rgb[1];
 		e->color.blue = scene->rgb[2];

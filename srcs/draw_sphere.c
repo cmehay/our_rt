@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:25 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/13 15:46:36 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/14 13:33:52 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		get_inter_to_print(t_env *e, t_data *scene)
 		: fmax(inter1, inter2);
 	if (((e->ray.inter == -1) || e->ray.inter > inter2) && inter2 > 0.01)
 	{
-		e->ray.inter = inter1;
+		e->ray.inter = inter2;
 		e->object = 1;
 		e->heart_sphere[0] = scene->pos.x;
 		e->heart_sphere[1] = scene->pos.y;
