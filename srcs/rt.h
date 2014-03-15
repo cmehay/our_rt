@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/15 19:34:06 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/15 20:35:31 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 
-# define HEIGHT 400
-# define WIDTH 600
+# define HEIGHT 800
+# define WIDTH 1600
 
 # define OBJ_CAM "cam"
 # define OBJ_LIGHT "light"
