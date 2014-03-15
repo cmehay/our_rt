@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/14 14:49:12 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/15 19:34:06 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,23 @@
 
 # define HEIGHT 400
 # define WIDTH 600
+
+# define OBJ_CAM "cam"
+# define OBJ_LIGHT "light"
+# define OBJ_SPHERE "sphere"
+# define OBJ_CYLINDER "cylinder"
+# define OBJ_CONE "cone"
+# define OBJ_PLAN "plan"
+
+typedef enum	e_obj
+{
+	CAM = 1,
+	SPHERE,
+	CYLINDER,
+	CONE,
+	PLAN,
+	LIGHT
+}				t_obj;
 
 typedef struct	s_mlx
 {
@@ -71,7 +88,7 @@ typedef struct s_data	t_data;
 
 struct	s_data
 {
-	char	*what;
+	t_obj	obj;
 	t_pos	pos;
 	t_pos	angle;
 	float	radius;
@@ -104,8 +121,8 @@ typedef struct	s_env
 
 t_data	*get_infos(int fd);
 t_data	*init_list_with_cam(char *line);
-t_data	*collect_info_about_obj(t_data *node, char **tab);
-int		fill_list_with_obj(t_data **list, char *line);
+t_data	*collect_info_about_obj(t_data *obj, char **tab, t_obj type);
+void	fill_list_with_obj(t_data **list, char **tab, t_obj obj, int line);
 
 int		set_mlx(t_env *e, t_data *scene);
 int		key_hook(int keycode);
@@ -140,6 +157,17 @@ void	lightcylinder(t_env *e);
 void	size_light_on_cyl(t_env *e, t_data *scene);
 
 void	*safe_malloc(size_t size);
+int		count_array(char **array);
+char	*sanityze_str(char *str);
 
+char	**gimme_obj_list(void);
+t_obj	parse_object(char *input);
+
+void	*display_parse_error(t_obj type, int line);
+void	display_ignored_line(int line);
+int		return_parse_error(void);
+
+t_data	*set_cam(char **input, int line);
+t_data	*get_cam(void);
 
 #endif /* !RT_H */

@@ -1,49 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/03/13 14:12:41 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/15 17:40:36 by cmehay           ###   ########.fr       */
+/*   Created: 2014/03/15 14:37:00 by cmehay            #+#    #+#             */
+/*   Updated: 2014/03/15 18:34:51 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	*safe_malloc(size_t size)
+char	**gimme_obj_list(void)
 {
-	void	*rtn;
-
-	rtn = cool_malloc(size);
-	if (!rtn)
+	static char	*objs[] =
 	{
-		ft_putendl_fd("Can't malloc", 2);
-		exit(2);
-	}
-	return (rtn);
+		OBJ_CAM,
+		OBJ_SPHERE,
+		OBJ_CYLINDER,
+		OBJ_CONE,
+		OBJ_PLAN,
+		OBJ_LIGHT,
+		NULL
+	};
+
+	return (objs);
 }
 
-int		count_array(char **array)
+t_obj	parse_object(char *input)
 {
-	int	i;
+	t_obj	count;
+	char	**objs;
 
-	i = 0;
-	while (array && *array++)
-		i++;
-	return (i);
-}
-
-char	*sanityze_str(char *str)
-{
-	char	*rtn;
-
-	rtn = str;
-	while (str && *str)
+	objs = gimme_obj_list();
+	count = count_array(objs) + 1;
+	while (--count)
 	{
-		*str = (*str == '\t') ? ' ' : *str;
-		str++;
+		if (ft_strequ(objs[count - 1], input))
+			return (count);
 	}
-	return (rtn);
+	return (count);
 }
+

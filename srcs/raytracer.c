@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:13 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/13 16:02:34 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/15 19:30:12 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int		id_object(t_env *e, t_data *scene)
 	while (scene)
 	{
 		scene = scene->next;
-		if (scene && !ft_strcmp("sphere", scene->what))
+		if (scene && scene->obj == SPHERE)
 			rt_sphere(e, scene);
-		if (scene && !ft_strcmp("plan", scene->what))
+		if (scene && scene->obj == PLAN)
 			rt_plan(e, scene);
-		if (scene && !ft_strcmp("cone", scene->what))
+		if (scene && scene->obj == CONE)
 			rt_cone(e, scene);
-		if (scene && !ft_strcmp("cylinder", scene->what))
+		if (scene && scene->obj == CYLINDER)
 			rt_cylinder(e, scene);
 	}
 	return (0);

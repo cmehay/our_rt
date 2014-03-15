@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:13:36 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/14 14:49:14 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/15 19:28:29 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,41 @@
 t_data		*get_infos(int fd)
 {
 	char	*line;
+	char	**split;
 	t_data	*list;
+	int		line_nb;
+	t_obj	obj;
 
-	list = (t_data *)safe_malloc(sizeof(t_data));
-	cool_next_line(fd, &line);
-	cool_next_line(fd, &line);
-	list = init_list_with_cam(line);
-	while (cool_next_line(fd, &line) > 0)
-		fill_list_with_obj(&list, line);
-	cool_free(line);
+	line_nb = 0;
+	list = NULL;
+	while (cool_next_line(fd, &line) > 0 && line && ++line_nb)
+	{
+		split = cool_strsplit(sanityze_str(line), ' ');
+		if (split && split[0] && parse_object(split[0]) == CAM)
+			set_cam(split, line_nb);
+		else if (split && split[0] && (obj = parse_object(split[0])) > CAM)
+			fill_list_with_obj(&list, split, obj, line_nb);
+		else
+			display_ignored_line(line_nb);
+		cool_free(line);
+	}
+	if (!get_cam())
+		return (NULL);
 	return (list);
 }
 
-t_data		*init_list_with_cam(char *line)
+void	fill_list_with_obj(t_data **list, char **tab, t_obj type, int line)
 {
-	char	**tab;
-	t_data	*cam;
-
-	cam = (t_data *)safe_malloc(sizeof(t_data));
-	tab = ft_strsplit(line, ' ');
-	cam->pos.x = ft_atoi(tab[1]);
-	cam->pos.y = ft_atoi(tab[2]);
-	cam->pos.z = ft_atoi(tab[3]);
-	cam->vect.x = ft_atoi(tab[4]);
-	cam->vect.y = ft_atoi(tab[5]);
-	cam->vect.z = ft_atoi(tab[6]);
-	cam->angle.x = ft_atoi(tab[7]);
-	cam->angle.y = ft_atoi(tab[8]);
-	cam->angle.z = ft_atoi(tab[9]);
-	cam->next = NULL;
-	return (cam);
-}
-
-int		fill_list_with_obj(t_data **list, char *line)
-{
-	int		i;
-	char	**tab;
 	t_data	*obj;
 	t_data	*tmp;
 
-	i = 0;
-	tab = ft_strsplit(line, ' ');
-	while (tab && tab[i])
-		i++;
-	if (i != 11)
-		return (-1);
+	if (count_array(tab) != 11)
+	{
+		display_parse_error(type, line);
+		return ;
+	}
 	obj = (t_data *)safe_malloc(sizeof(t_data));
-	obj = collect_info_about_obj(obj, tab);
+	obj = collect_info_about_obj(obj, tab, type);
 	tmp = *list;
 	if (tmp)
 	{
@@ -69,12 +57,13 @@ int		fill_list_with_obj(t_data **list, char *line)
 			tmp = tmp->next;
 		tmp->next = obj;
 	}
-	return (0);
+	else
+		*list = obj;
 }
 
-t_data	*collect_info_about_obj(t_data *obj, char **tab)
+t_data	*collect_info_about_obj(t_data *obj, char **tab, t_obj type)
 {
-	obj->what = ft_strdup(tab[0]);
+	obj->obj = type;
 	obj->pos.x = ft_atoi(tab[1]);
 	obj->pos.y = ft_atoi(tab[2]);
 	obj->pos.z = ft_atoi(tab[3]);
