@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/01 02:13:06 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/13 16:08:54 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/16 18:07:58 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,22 @@
 int		rt_plan(t_env *e, t_data *scene)
 {
 	float	inter;
-	float	x;
-	float	y;
-	float	z;
+	t_pos	o;
+	t_pos	v;
 
-	x = e->cam.x;
-	y = e->cam.y;
-	z = e->cam.z;
-	inter = -((scene->pos.x * x + scene->pos.y * y + scene->pos.z * z
-		+ scene->radius) / (scene->pos.x * e->vect.x + scene->pos.y * e->vect.y
-		+ scene->pos.z * e->vect.z));
+	o.x = e->cam.x + scene->pos.x * scene->radius;
+	o.y = e->cam.y + scene->pos.y * scene->radius;
+	o.z = e->cam.z + scene->pos.z * scene->radius;
+	v.x = e->vect.x;
+	v.y = e->vect.y;
+	v.z = e->vect.z;
+	rt_rotate(scene, &v, &o, e);
+	o.x = o.x - scene->pos.x * scene->radius;
+	o.y = o.y - scene->pos.y * scene->radius;
+	o.z = o.z - scene->pos.z * scene->radius;
+	inter = -((scene->pos.x * o.x + scene->pos.y * o.y + scene->pos.z * o.z
+		+ scene->radius) / (scene->pos.x * v.x + scene->pos.y * v.y
+		+ scene->pos.z * v.z));
 	if (((e->ray.inter == -1) || (inter < e->ray.inter)) && inter > 0.01)
 	{
 		e->ray.inter = inter;

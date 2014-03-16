@@ -6,39 +6,11 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:31 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/16 13:17:58 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/16 18:08:23 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static void	rt_cone_set_1(t_env *e, t_data *scene, t_pos *v, t_pos *o)
-{
-	float	mem;
-	t_pos	a;
-	t_pos	vect;
-	
-	vect = e->vect;
-	a = scene->angle;
-	if (a.y)
-	{
-		mem = vect.x;
-		v->x = cos(a.y * M_PI / 180) * mem - sin(a.y * M_PI / 180) * vect.z;
-		v->z = sin(a.y * M_PI / 180) * mem + cos(a.y * M_PI / 180) * vect.z;
-		mem = o->x;
-		o->x = cos(a.y * M_PI / 180) * mem - sin(a.y * M_PI / 180) * o->z;
-		o->z = sin(a.y * M_PI / 180) * mem + cos(a.y * M_PI / 180) * o->z;
-	}
-	if (a.x)
-	{
-		mem = v->y;
-		v->y = cos(a.x * M_PI / 180) * mem + sin(a.x * M_PI / 180) * v->z;
-		v->z = sin(a.x * M_PI / 180) * mem * -1 + cos(a.x * M_PI / 180) * v->z;
-		mem = o->y;
-		o->y = cos(a.x * M_PI / 180) * mem + sin(a.x * M_PI / 180) * o->z;
-		o->z = sin(a.x * M_PI / 180) * mem * -1 + cos(a.x * M_PI / 180) * o->z;
-	}
-}
 
 void	rt_cone(t_env *e, t_data *scene)
 {
@@ -51,7 +23,7 @@ void	rt_cone(t_env *e, t_data *scene)
 	v.x = e->vect.x;
 	v.z = e->vect.z;
 	v.y = e->vect.y;
-	rt_cone_set_1(e, scene, &v, &o);
+	rt_rotate(scene, &v, &o, e);
 	o.x = scene->pos.x + o.x;
 	o.y = scene->pos.y + o.y;
 	o.z = scene->pos.z + o.z;

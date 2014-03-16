@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/15 20:35:31 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/16 18:12:11 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,5 +169,7 @@ int		return_parse_error(void);
 
 t_data	*set_cam(char **input, int line);
 t_data	*get_cam(void);
+
+void	rt_rotate(t_data *scene, t_pos *v, t_pos *o, t_env *e);
 
 #endif /* !RT_H */
