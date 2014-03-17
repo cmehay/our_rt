@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:31 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/16 18:08:23 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/17 16:58:31 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,35 @@ int		get_cone_to_print(t_env *e, t_data *scene)
 	if (((e->ray.inter == -1) || e->ray.inter > inter2) && inter2 > 0.01)
 	{
 		e->ray.inter = inter2;
-		e->object = 3;
+		e->object = 4;
 		e->color.red = scene->rgb[0];
 		e->color.green = scene->rgb[1];
 		e->color.blue = scene->rgb[2];
 	}
 	return (0);
+}
+
+void	lightcone(t_env *e)
+{
+	float	len;
+	float	x;
+	float	y;
+	float	z;
+	float	scal;
+
+	x = e->inter.x - e->heart_sphere[0];
+	y = e->inter.y - e->heart_sphere[1];
+	z = 0;
+	len = sqrt(x * x + y * y + z * z);
+	e->normal.x = x / len;
+	e->normal.y = y / len;
+	e->normal.z = z / len;
+	scal = (e->normal.x * e->shadowray.x + e->normal.y * e->shadowray.y
+			+ e->normal.z * e->shadowray.z);
+	scal = (scal < 0.2) ? 0.2 : scal;
+	e->color.red *= scal;
+	e->color.green *= scal;
+	e->color.blue *= scal;
 }
 
 void	size_light_on_cone(t_env *e, t_data *scene)

@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/16 18:08:16 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/17 17:52:46 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void	size_light_on_cyl(t_env *e, t_data *scene)
 		+ e->shadowray.y * (e->inter.y - scene->pos.y));
 	e->c = (pow((e->inter.x - scene->pos.x), 2)
 		+ pow((e->inter.y - scene->pos.y), 2) - pow(scene->radius, 2));
-	e->ray.delta = pow(e->b, 2) - 4 * e->a * e->c;
+	e->ray.delta_light = pow(e->b, 2) - 4 * e->a * e->c;
 	get_light_to_print(e);
 }

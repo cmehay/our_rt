@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/01 02:13:06 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/16 18:07:58 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/17 21:19:16 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int		rt_plan(t_env *e, t_data *scene)
 	return (0);
 }
 
+#include <stdio.h>
+
 int		lightplan(t_env *e)
 {
 	float	scal;
@@ -73,12 +75,13 @@ void	size_light_on_plan(t_env *e, t_data *scene)
 	inter = -((scene->pos.x * x + scene->pos.y * y + scene->pos.z * z
 		+ scene->radius) / (scene->pos.x * e->shadowray.x
 		+ scene->pos.y * e->shadowray.y + scene->pos.z * e->shadowray.z));
-	if (inter > 4 && (inter < e->screen.length))
+	if (inter > 20 && (inter < e->screen.length))
 	{
-		if (e->color.red > 20)
-			e->color.red /= 2;
-		if (e->color.red > 20)
-			e->color.red /= 2;
+		printf("%f\n", inter);
+		if (e->color.blue > 20)
+			e->color.blue /= 2;
+		if (e->color.green > 20)
+			e->color.green /= 2;
 		if (e->color.red > 20)
 			e->color.red /= 2;
 	}

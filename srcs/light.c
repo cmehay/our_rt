@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/15 19:12:06 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/17 21:20:50 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,19 @@ int		check_light(t_env *e, t_data **scene)
 	e->inter.x = e->cam.x + (e->vect.x * e->ray.inter);
 	e->inter.y = e->cam.y + (e->vect.y * e->ray.inter);
 	e->inter.z = e->cam.z + (e->vect.z * e->ray.inter);
+	e->lenght = 1000;
 	while (tmp)
 	{
-		tmp = tmp->next;
 		if (tmp && tmp->obj == LIGHT)
 		{
 			size_raylight(e, tmp);
 			id_object_for_light(e, scene);
 		}
+		tmp = tmp->next;
 	}
 	return (0);
 }
+#include <stdio.h>
 
 void	size_raylight(t_env *e, t_data *scene)
 {
@@ -61,9 +63,10 @@ void	id_object_for_light(t_env *e, t_data **scene)
 		lightplan(e);
 	if (e->object == 3)
 		lightcylinder(e);
+	if (e->object == 4)
+		lightcone(e);
 	while (tmp)
 	{
-		tmp = tmp->next;
 		if (tmp && tmp->obj == SPHERE)
 			size_light_on_sphere(e, tmp);
 		if (tmp && tmp->obj == PLAN)
@@ -72,5 +75,6 @@ void	id_object_for_light(t_env *e, t_data **scene)
 			size_light_on_cyl(e, tmp);
 		if (tmp && tmp->obj == CONE)
 			size_light_on_cone(e, tmp);
+		tmp = tmp->next;
 	}
 }

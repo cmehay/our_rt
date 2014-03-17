@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:25 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/14 13:33:52 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/17 17:38:22 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		get_inter_to_print(t_env *e, t_data *scene)
 	return (0);
 }
 
+#include <stdio.h>
+
 void	lightsphere(t_env *e)
 {
 	float	len;
@@ -91,6 +93,8 @@ void	get_light_to_print(t_env *e)
 {
 	float	inter;
 	float	inter2;
+	float	min;
+	float	max;
 
 	inter = 0;
 	inter2 = 0;
@@ -98,10 +102,11 @@ void	get_light_to_print(t_env *e)
 	{
 		inter2 = (-e->b + sqrt(e->ray.delta_light)) / (2 * e->a);
 		inter = (-e->b - sqrt(e->ray.delta_light)) / (2 * e->a);
-		inter = fmin(inter2, inter);
-		if (inter > 0.1 && (inter2 < e->lenght))
+		min = fmin(inter2, inter);
+		max = fmax(inter2, inter);
+		if (min > 0.1 && (max < e->lenght))
 		{
-			e->ray.inter_light = inter;
+			e->ray.inter_light = min;
 			if (e->color.red > 20)
 				e->color.red /= 2;
 			if (e->color.green > 20)
