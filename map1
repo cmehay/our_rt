@@ -6,3 +6,5 @@ sphere 15 0 2 5 250 250 0 0 0 0
 cylinder 20 20 3 5 230 140 30 0 0 0
 cylinder 20 -30 3 15 30 140 30 0 0 0
 light 60 0 90 5 10 0 0 0 0 0
+
+anti-aliasing 4

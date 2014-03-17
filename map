@@ -1,6 +1,10 @@
 { cam: x(far/near) y(right/left) z(up/down) ; vectx vecty vectz ; angle_x angle_y angle_z }
 cam       -100 0 0       0 0 0      0 0 0
 
+width 800
+height 600
+anti-aliasing 16
+
 { obj: x(sback/front) y(right/left) z(up/down) radius(small/big) ; red green blue ; angle_x angle_y angle_z }
 sphere   0 3 0 10       255 10 8     0 0 0
 sphere   -28 20 6 4     205 133 63   0 0 0

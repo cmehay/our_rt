@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/16 13:09:10 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/16 16:02:28 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	rt_cylinder_set_1(t_env *e, t_data *scene, t_pos *v, t_pos *o)
 	float	mem;
 	t_pos	a;
 	t_pos	vect;
-	
+
 	vect = e->vect;
 	a = scene->angle;
 	if (a.y)

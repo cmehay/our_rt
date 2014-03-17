@@ -28,11 +28,14 @@ SRC =	main.c \
 		utils.c \
 		map_parser.c \
 		errors.c \
-		cam.c
+		cam.c \
+		mlx_utils.c \
+		downscale.c \
+		pixels.c
 
 OBJS = $(SCRFILES:.c=.o)
 CC = clang
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -O3 -g -Wall -Werror -Wextra
 LDFLAGS = -L libft/ -lft -L/usr/X11/lib -lXext -lX11 -lmlx -lm
 LIBFT = libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:13 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/16 15:27:39 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/17 18:09:48 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,31 @@ int		raytracer(t_env *e, t_data **scene)
 {
 	int		color;
 
-	e->ray.go_h = -HEIGHT / 2;
-	while (e->ray.go_h < HEIGHT / 2)
+	e->ray.go.h = -(int)e->screen.render.h / 2;
+	while (e->ray.go.h < (int)e->screen.render.h / 2)
 	{
-		e->ray.go_w = -WIDTH / 2;
-		while (e->ray.go_w < WIDTH / 2)
+		e->ray.go.w = -(int)e->screen.render.w / 2;
+		while (e->ray.go.w < (int)e->screen.render.w / 2)
 		{
 			size_ray(e);
 			id_object(e, *scene);
 			if (e->color.red != 0 || e->color.green != 0 || e->color.blue != 0)
 				check_light(e, scene);
-			color = (e->color.red * 256 * 256) + (e->color.green * 256)
-				+ e->color.blue;
-			mlx_put_px_img(e, e->ray.go_w + WIDTH / 2, e->ray.go_h + HEIGHT / 2,
-				color);
-			e->ray.go_w++;
+			color = color_to_pixel(e->color);
+			mlx_put_px_img_render(e, e->ray.go.w + (int)e->screen.render.w / 2,
+				e->ray.go.h + (int)e->screen.render.h / 2, color);
+			e->ray.go.w++;
 		}
-		e->ray.go_h++;
+		e->ray.go.h++;
 	}
 	return (0);
 }
 
 int		size_ray(t_env *e)
 {
-	e->pos.x = e->screen.length;
-	e->pos.y = e->screen.width * e->ray.go_w / WIDTH;
-	e->pos.z = e->screen.height * e->ray.go_h / HEIGHT;
+	e->pos.x = 20;
+	e->pos.y = 20 * e->ray.go.w / e->screen.render.w;
+	e->pos.z = 10 * e->ray.go.h / e->screen.render.h;
 	e->ray.len = sqrt(e->pos.x * e->pos.x + e->pos.y * e->pos.y
 		+ e->pos.z * e->pos.z);
 	e->vect.x = e->pos.x / e->ray.len;
