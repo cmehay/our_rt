@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:38 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/17 11:26:59 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/18 19:02:21 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	set_screen(t_env *e)
 {
-	e->screen.upscale = (e->screen.upscale) ? e->screen.upscale : 1;
+	e->screen.upscale = (e->screen.upscale) ? e->screen.upscale : 0;
 	e->screen.length = (e->screen.length) ? e->screen.length : PRESET_WIDTH;
 	e->screen.display.w = (e->screen.display.w) ? e->screen.display.w
 		: PRESET_WIDTH;
 	e->screen.display.h = (e->screen.display.h) ? e->screen.display.h
 		: PRESET_HEIGHT;
-	e->screen.render.w = e->screen.display.w * e->screen.upscale;
-	e->screen.render.h = e->screen.display.h * e->screen.upscale;
+	e->screen.render.w = (int)e->screen.display.w << e->screen.upscale;
+	e->screen.render.h = (int)e->screen.display.h << e->screen.upscale;
 }
 
 static void	set_mlx_struct(t_env *e)

@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/15 14:37:00 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/17 15:28:52 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/18 18:51:04 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ t_obj	parse_object(char *input)
 
 void	set_options(char **split, t_env *e, t_obj obj, int line)
 {
+	int	set;
+
 	if (count_array(split) != 2 || !ft_strtest(split[1], ft_isdigit))
 	{
 		display_parse_error(obj, line);
 		return ;
 	}
-	if (obj == ANTIALIASING)
-		e->screen.upscale = ft_atoi(split[1]);
+	if (obj == ANTIALIASING && (set = ft_atoi(split[1])) < 4)
+		e->screen.upscale = set;
 	if (obj == WIDTH)
 		e->screen.display.w = ft_atoi(split[1]);
 	if (obj == HEIGHT)

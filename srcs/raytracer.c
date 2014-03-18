@@ -26,7 +26,7 @@ int		raytracer(t_env *e, t_data **scene)
 			id_object(e, *scene);
 			if (e->color.red != 0 || e->color.green != 0 || e->color.blue != 0)
 				check_light(e, scene);
-			color = color_to_pixel(e->color);
+			color = rgb_to_pixel(e->color);
 			mlx_put_px_img_render(e, e->ray.go.w + (int)e->screen.render.w / 2,
 				e->ray.go.h + (int)e->screen.render.h / 2, color);
 			e->ray.go.w++;

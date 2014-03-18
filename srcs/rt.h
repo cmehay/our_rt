@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/17 17:15:13 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/18 18:39:16 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,19 @@ typedef struct	s_pos
 	float	z;
 }				t_pos;
 
-typedef struct	s_color
+typedef struct	s_rgb
 {
 	int	red;
 	int	green;
 	int	blue;
-}				t_color;
+}				t_rgb;
+
+typedef struct	s_hsl
+{
+	float	hue;
+	float	saturation;
+	float	lightness;
+}				t_hsl;
 
 typedef struct	s_ray
 {
@@ -123,7 +130,7 @@ typedef struct	s_env
 	t_pos		vect;
 	t_pos		shadowray;
 	t_pos		inter;
-	t_color		color;
+	t_rgb		color;
 	int			object;
 	float		a;
 	float		b;
@@ -177,6 +184,8 @@ void	size_light_on_cyl(t_env *e, t_data *scene);
 void	*safe_malloc(size_t size);
 int		count_array(char **array);
 char	*sanityze_str(char *str);
+int		min_three(int a, int b, int c);
+int		max_three(int a, int b, int c);
 
 char	**gimme_obj_list(void);
 t_obj	parse_object(char *input);
@@ -191,7 +200,10 @@ t_data	*get_cam(void);
 
 void	downscale(t_env *e);
 
-t_color	pixel_to_color(int pixel);
-int		color_to_pixel(t_color color);
+t_rgb	pixel_to_rgb(int pixel);
+int		rgb_to_pixel(t_rgb color);
+t_hsl	rgb_to_hsl(t_rgb rgb);
+t_rgb	hsl_to_rgb(t_hsl hsl);
+
 
 #endif /* !RT_H */

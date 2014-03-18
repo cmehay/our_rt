@@ -6,23 +6,25 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:56:53 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/17 17:28:06 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/18 18:45:53 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_color	pixel_to_color(int pixel)
+t_rgb	pixel_to_rgb(int pixel)
 {
-	t_color	color;
+	t_rgb			color;
+	unsigned int	tmp;
 
-	color.red = pixel >> 16;
-	color.green = (pixel << 16) >> 24;
-	color.blue = (pixel << 24) >> 24;
+	tmp = pixel;
+	color.red = tmp >> 16;
+	color.green = (tmp << 16) >> 24;
+	color.blue = (tmp << 24) >> 24;
 	return (color);
 }
 
-int		color_to_pixel(t_color color)
+int		rgb_to_pixel(t_rgb color)
 {
 	int	pixel;
 
@@ -31,3 +33,5 @@ int		color_to_pixel(t_color color)
 	pixel += color.blue;
 	return (pixel);
 }
+
+

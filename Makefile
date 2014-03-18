@@ -35,7 +35,7 @@ SRC =	main.c \
 
 OBJS = $(SCRFILES:.c=.o)
 CC = clang
-CFLAGS = -O3 -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 LDFLAGS = -L libft/ -lft -L/usr/X11/lib -lXext -lX11 -lmlx -lm
 LIBFT = libft/libft.a
 
