@@ -6,11 +6,12 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/01 02:13:06 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/17 21:19:16 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/18 18:22:07 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <stdio.h>
 
 int		rt_plan(t_env *e, t_data *scene)
 {
@@ -39,22 +40,36 @@ int		rt_plan(t_env *e, t_data *scene)
 		e->color.blue = scene->rgb[2];
 		e->object = 2;
 		e->heart_plan[0] = scene->pos.x;
+		if (scene->radius < 0)
+			e->heart_plan[0] *= -1;
 		e->heart_plan[1] = scene->pos.y;
+		if (scene->radius < 0)
+			e->heart_plan[1] *= -1;
 		e->heart_plan[2] = scene->pos.z;
+		if (scene->radius < 0)
+			e->heart_plan[2] *= -1;
 		e->heart_plan[3] = scene->radius;
 	}
 	return (0);
 }
 
-#include <stdio.h>
 
 int		lightplan(t_env *e)
 {
 	float	scal;
+	float	len;
+	float	x;
+	float	y;
+	float	z;
 
-	scal = (e->heart_plan[0] * e->shadowray.x
-	+ e->heart_plan[1] * e->shadowray.y
-	+ e->heart_plan[2] * e->shadowray.z);
+	len = sqrt(e->heart_plan[0] * e->heart_plan[0] + e->heart_plan[1]
+	* e->heart_plan[1] + e->heart_plan[2] * e->heart_plan[2]);
+	x = e->heart_plan[0] / len;
+	y = e->heart_plan[1] / len;
+	z = e->heart_plan[2] / len;
+	scal = (x * e->shadowray.x
+	 + y * e->shadowray.y
+	 + z * e->shadowray.z);
 	scal = (scal < 0.2) ? 0.2 : scal;
 	e->color.red *= scal;
 	e->color.green *= scal;
@@ -77,7 +92,6 @@ void	size_light_on_plan(t_env *e, t_data *scene)
 		+ scene->pos.y * e->shadowray.y + scene->pos.z * e->shadowray.z));
 	if (inter > 20 && (inter < e->screen.length))
 	{
-		printf("%f\n", inter);
 		if (e->color.blue > 20)
 			e->color.blue /= 2;
 		if (e->color.green > 20)

@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:25 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/17 17:38:22 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/18 18:19:26 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int		get_inter_to_print(t_env *e, t_data *scene)
 	}
 	return (0);
 }
-
-#include <stdio.h>
 
 void	lightsphere(t_env *e)
 {
