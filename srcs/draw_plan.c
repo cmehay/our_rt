@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/01 02:13:06 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/18 18:22:07 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/19 15:23:41 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,10 @@ int		lightplan(t_env *e)
 	x = e->heart_plan[0] / len;
 	y = e->heart_plan[1] / len;
 	z = e->heart_plan[2] / len;
-	scal = (x * e->shadowray.x
-	 + y * e->shadowray.y
-	 + z * e->shadowray.z);
-	scal = (scal < 0.2) ? 0.2 : scal;
-	e->color.red *= scal;
-	e->color.green *= scal;
-	e->color.blue *= scal;
+	scal = 40 / (e->ray.len);
+	scal = (scal > 1) ? 1 : scal;
+	scal = (scal < 0.001) ? 0.001 : scal;
+	e->light *= scal;
 	return (0);
 }
 

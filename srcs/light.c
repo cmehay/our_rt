@@ -6,16 +6,20 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/18 17:18:39 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/19 15:34:38 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <stdio.h>
 
 int		check_light(t_env *e, t_data **scene)
 {
 	t_data	*tmp;
+	int		two_light;
 
+	e->light = 1;
+	two_light = 0;
 	tmp = *scene;
 	e->inter.x = e->cam.x + (e->vect.x * e->ray.inter);
 	e->inter.y = e->cam.y + (e->vect.y * e->ray.inter);
@@ -27,12 +31,17 @@ int		check_light(t_env *e, t_data **scene)
 		{
 			size_raylight(e, tmp);
 			id_object_for_light(e, scene);
+			two_light++;
 		}
 		tmp = tmp->next;
 	}
+	while (--two_light)
+		e->light = sqrt(e->light);
+	e->color.red *= e->light;
+	e->color.green *= e->light;
+	e->color.blue *= e->light;
 	return (0);
 }
-#include <stdio.h>
 
 void	size_raylight(t_env *e, t_data *scene)
 {

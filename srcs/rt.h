@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/17 18:58:48 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/19 14:57:49 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct	s_env
 	float		heart_sphere[3];
 	float		heart_plan[4];
 	float		angle[3];
+	float		light;
 }				t_env;
 
 t_data	*get_infos(int fd);

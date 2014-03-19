@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:25 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/18 18:19:26 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/19 15:23:25 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,10 @@ void	lightsphere(t_env *e)
 	e->normal.y = y / len;
 	e->normal.z = z / len;
 	scal = (e->normal.x * e->shadowray.x + e->normal.y * e->shadowray.y
-		+ e->normal.z * e->shadowray.z);
-	scal = (scal < 0.2) ? 0.2 : scal;
-	e->color.red *= scal;
-	e->color.green *= scal;
-	e->color.blue *= scal;
+		+ e->normal.z * e->shadowray.z) / (e->ray.len / 40);
+	scal = (scal < 0.001) ? 0.001 : scal;
+	scal = (scal > 1) ? 1 : scal;
+	e->light *= scal;
 }
 
 void	size_light_on_sphere(t_env *e, t_data *scene)
