@@ -6,7 +6,7 @@
 /*   By: dcouly <dcouly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 15:57:57 by dcouly            #+#    #+#             */
-/*   Updated: 2014/03/17 20:07:51 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/19 18:53:07 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		rt_rotate(t_data *scene, t_pos *v, t_pos *o, t_env *e)
 	t_pos	 a;
 
 	a = scene->angle;
-	rt_rotate_y(a, v, o, e);
 	rt_rotate_x(a, v, o, e);
+	rt_rotate_y(a, v, o, e);
 	rt_rotate_z(a, v, o, e);
 }

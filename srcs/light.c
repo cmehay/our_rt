@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/19 15:34:38 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/19 19:47:17 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,21 @@ void	size_raylight(t_env *e, t_data *scene)
 	e->shadowray.z = z / len;
 }
 
+#include <stdio.h>
+
 void	id_object_for_light(t_env *e, t_data **scene)
 {
 	t_data	*tmp;
 
 	tmp = *scene;
+	printf("1 %f %f %f\n", e->inter.x, e->inter.y, e->inter.z);
 	e->ray.inter_light = -1;
 	if (e->object == 1)
 		lightsphere(e);
 	if (e->object == 2)
 		lightplan(e);
 	if (e->object == 3)
-		lightcylinder(e);
+		lightcylinder(e, *scene);
 	if (e->object == 4)
 		lightcone(e);
 	while (tmp)
@@ -86,4 +89,5 @@ void	id_object_for_light(t_env *e, t_data **scene)
 			size_light_on_cone(e, tmp);
 		tmp = tmp->next;
 	}
+	printf("2 %f %f %f\n", e->inter.x, e->inter.y, e->inter.z);
 }

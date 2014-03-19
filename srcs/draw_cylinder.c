@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/17 17:52:46 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/19 20:11:00 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		get_cyl_to_print(t_env *e, t_data *scene)
 		e->object = 3;
 		e->heart_sphere[0] = scene->pos.x;
 		e->heart_sphere[1] = scene->pos.y;
+		e->heart_sphere[2] = scene->pos.z;
 		e->color.red = scene->rgb[0];
 		e->color.green = scene->rgb[1];
 		e->color.blue = scene->rgb[2];
@@ -58,36 +59,54 @@ int		get_cyl_to_print(t_env *e, t_data *scene)
 	return (0);
 }
 
-void	lightcylinder(t_env *e)
+void	lightcylinder(t_env *e, t_data *scene)
 {
 	float	len;
-	float	x;
-	float	y;
-	float	z;
+	t_pos	i;
+	t_pos	h;
+	t_pos	s;
 	float	scal;
 
-	x = e->inter.x - e->heart_sphere[0];
-	y = e->inter.y - e->heart_sphere[1];
-	z = 0;
-	len = sqrt(x * x + y * y + z * z);
-	e->normal.x = x / len;
-	e->normal.y = y / len;
-	e->normal.z = z / len;
-	scal = (e->normal.x * e->shadowray.x + e->normal.y * e->shadowray.y
-		 + e->normal.z * e->shadowray.z);
-	scal = (scal < 0.2) ? 0.2 : scal;
-	e->color.red *= scal;
-	e->color.green *= scal;
-	e->color.blue *= scal;
+	i.x = e->inter.x - e->heart_sphere[0];
+	i.y = e->inter.y - e->heart_sphere[1];
+	i.z = e->inter.z - e->heart_sphere[2];
+	h.x = e->heart_sphere[0];
+	h.y = e->heart_sphere[1];
+	h.z = e->heart_sphere[2];
+	rt_rotate(scene, &i, &h, e);
+	i.z = 0;
+	len = sqrt(i.x * i.x + i.y * i.y + i.z * i.z);
+	e->normal.x = i.x / len;
+	e->normal.y = i.y / len;
+	e->normal.z = i.z / len;
+	s.x = e->shadowray.x;
+	s.y = e->shadowray.y;
+	s.z = e->shadowray.z;
+	rt_rotate(scene, &i, &s, e);
+	scal = (e->normal.x * s.x + e->normal.y * s.y
+		 + e->normal.z * s.z) / (e->ray.len / 40);
+	scal = (scal > 1) ? 1 : scal;
+	scal = (scal < 0.001) ? 0.001 : scal;
+	e->light *= scal;
 }
 
 void	size_light_on_cyl(t_env *e, t_data *scene)
 {
-	e->a = pow((e->shadowray.x), 2) + pow((e->shadowray.y), 2);
-	e->b = 2 * ((e->shadowray.x) * (e->inter.x - scene->pos.x)
-		+ e->shadowray.y * (e->inter.y - scene->pos.y));
-	e->c = (pow((e->inter.x - scene->pos.x), 2)
-		+ pow((e->inter.y - scene->pos.y), 2) - pow(scene->radius, 2));
+	t_pos	s;
+	t_pos	i;
+
+	i.x = e->inter.x;
+	i.y = e->inter.y;
+	i.z = e->inter.z;
+	s.x = e->shadowray.x;
+	s.y = e->shadowray.y;
+	s.z = e->shadowray.z;
+	rt_rotate(scene, &s, &i, e);
+	e->a = pow((s.x), 2) + pow((s.y), 2);
+	e->b = 2 * ((s.x) * (i.x - scene->pos.x)
+		+ s.y * (i.y - scene->pos.y));
+	e->c = (pow((i.x - scene->pos.x), 2)
+		+ pow((i.y - scene->pos.y), 2) - pow(scene->radius, 2));
 	e->ray.delta_light = pow(e->b, 2) - 4 * e->a * e->c;
 	get_light_to_print(e);
 }
