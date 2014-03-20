@@ -6,13 +6,13 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:13:36 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/15 20:34:51 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/17 15:40:11 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_data		*get_infos(int fd)
+t_data		*get_infos(t_env *e, int fd)
 {
 	char	*line;
 	char	**split;
@@ -27,8 +27,11 @@ t_data		*get_infos(int fd)
 		split = cool_strsplit(sanityze_str(line), ' ');
 		if (split && split[0] && parse_object(split[0]) == CAM)
 			set_cam(split, line_nb);
-		else if (split && split[0] && (obj = parse_object(split[0])) > CAM)
+		else if (split && split[0] && (obj = parse_object(split[0])) > CAM
+			&& obj < ANTIALIASING)
 			fill_list_with_obj(&list, split, obj, line_nb);
+		else if (split && split[0] && parse_object(split[0]) >= ANTIALIASING)
+			set_options(split, e, obj, line_nb);
 		else
 			display_ignored_line(line_nb);
 		cool_free(line);

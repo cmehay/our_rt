@@ -29,7 +29,10 @@ SRC =	main.c \
 		map_parser.c \
 		errors.c \
 		rotate.c \
-		cam.c
+		cam.c \
+		mlx_utils.c \
+		downscale.c \
+		pixels.c
 
 OBJS = $(SCRFILES:.c=.o)
 CC = clang

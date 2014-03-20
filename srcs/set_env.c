@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/12 17:16:50 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/13 14:38:56 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/16 16:19:03 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ t_env	*set_env(void)
 	static t_env	*env;
 
 	if (!env)
-		env = (t_env*)malloc(sizeof(t_env));
+		env = (t_env*)safe_malloc(sizeof(t_env));
 	return (env);
 }

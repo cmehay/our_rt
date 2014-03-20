@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/20 18:37:02 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/20 22:43:11 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		check_light(t_env *e, t_data **scene)
 	e->color.blue *= e->light;
 	return (0);
 }
+#include <stdio.h>
 
 void	size_raylight(t_env *e, t_data *scene)
 {

@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:31 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/20 18:51:06 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/20 22:39:07 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int		get_cone_to_print(t_env *e, t_data *scene)
 	return (0);
 }
 
-#include <stdio.h>
-
 void	lightcone(t_env *e, t_data *scene)
 {
 	float	len;
@@ -73,7 +71,6 @@ void	lightcone(t_env *e, t_data *scene)
 	mem = (scene->radius / 10);
 	mem = atan(mem);
 	x = e->inter.x - e->heart_sphere[0];
-	printf("%f\n", cos(mem) * -x);
 	y = e->inter.y - e->heart_sphere[1];
 	z = 0;
 	len = sqrt(x * x + y * y + z * z);

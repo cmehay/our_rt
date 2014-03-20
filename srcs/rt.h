@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/20 18:36:40 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/20 22:45:27 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 
-# define HEIGHT 800
-# define WIDTH 1600
+# define PRESET_HEIGHT 800
+# define PRESET_WIDTH 1600
+# define PRESET_ANTIALIASING 1
 
 # define OBJ_CAM "cam"
 # define OBJ_LIGHT "light"
@@ -28,6 +29,9 @@
 # define OBJ_CYLINDER "cylinder"
 # define OBJ_CONE "cone"
 # define OBJ_PLAN "plan"
+# define OBJ_ALIASING "anti-aliasing"
+# define OBJ_HEIGHT "height"
+# define OBJ_WIDTH "width"
 
 typedef enum	e_obj
 {
@@ -36,26 +40,38 @@ typedef enum	e_obj
 	CYLINDER,
 	CONE,
 	PLAN,
-	LIGHT
+	LIGHT,
+	ANTIALIASING,
+	HEIGHT,
+	WIDTH
 }				t_obj;
 
 typedef struct	s_mlx
 {
 	void	*mlx;
 	void	*win;
-	void	*img;
-	char	*data;
+	void	*img_render;
+	void	*img_display;
+	char	*data_render;
+	char	*data_display;
 	int		endian;
 	int		line;
 	int		bpp;
 }				t_mlx;
 
+typedef struct	s_size
+{
+	float	h;
+	float	w;
+}				t_size;
+
 typedef struct	s_screen
 {
 	float	length;
-	float	width;
-	float	height;
+	t_size	display;
+	t_size	render;
 	float	rayon;
+	int		upscale;
 }				t_screen;
 
 typedef struct	s_pos
@@ -65,18 +81,24 @@ typedef struct	s_pos
 	float	z;
 }				t_pos;
 
-typedef struct	s_color
+typedef struct	s_rgb
 {
 	int	red;
 	int	green;
 	int	blue;
-}				t_color;
+}				t_rgb;
+
+typedef struct	s_hsl
+{
+	float	hue;
+	float	saturation;
+	float	lightness;
+}				t_hsl;
 
 typedef struct	s_ray
 {
 	int		line;
-	float	go_w;
-	float	go_h;
+	t_size	go;
 	float	inter;
 	float	inter_light;
 	float	len;
@@ -106,7 +128,7 @@ typedef struct	s_env
 	t_pos		vect;
 	t_pos		shadowray;
 	t_pos		inter;
-	t_color		color;
+	t_rgb		color;
 	int			object;
 	float		a;
 	float		b;
@@ -118,15 +140,18 @@ typedef struct	s_env
 	float		light;
 }				t_env;
 
-t_data	*get_infos(int fd);
+t_data	*get_infos(t_env *e, int fd);
 t_data	*init_list_with_cam(char *line);
 t_data	*collect_info_about_obj(t_data *obj, char **tab, t_obj type);
 void	fill_list_with_obj(t_data **list, char **tab, t_obj obj, int line);
 
 int		set_mlx(t_env *e, t_data *scene);
+
 int		key_hook(int keycode);
 int		expose_hook(t_env *e);
-int		mlx_put_px_img(t_env *e, int x, int y, int color);
+int		mlx_put_px_img_render(t_env *e, int x, int y, int color);
+int		mlx_get_px_img_render(t_env *e, int x, int y);
+int		mlx_put_px_img_display(t_env *e, int x, int y, int color);
 
 int		raytracer(t_env *e, t_data **scene);
 int		size_ray(t_env *e);
@@ -162,6 +187,7 @@ char	*sanityze_str(char *str);
 
 char	**gimme_obj_list(void);
 t_obj	parse_object(char *input);
+void	set_options(char **split, t_env *e, t_obj obj, int line);
 
 void	*display_parse_error(t_obj type, int line);
 void	display_ignored_line(int line);
@@ -171,5 +197,9 @@ t_data	*set_cam(char **input, int line);
 t_data	*get_cam(void);
 
 void	rt_rotate(t_data *scene, t_pos *v, t_pos *o, t_env *e);
+void	downscale(t_env *e);
+
+t_rgb	pixel_to_rgb(int pixel);
+int		rgb_to_pixel(t_rgb color);
 
 #endif /* !RT_H */

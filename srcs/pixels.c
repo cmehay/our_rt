@@ -1,49 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   pixels.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/03/13 14:12:41 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/20 22:44:50 by cmehay           ###   ########.fr       */
+/*   Created: 2014/03/17 16:56:53 by cmehay            #+#    #+#             */
+/*   Updated: 2014/03/18 18:45:53 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	*safe_malloc(size_t size)
+t_rgb	pixel_to_rgb(int pixel)
 {
-	void	*rtn;
+	t_rgb			color;
+	unsigned int	tmp;
 
-	rtn = cool_malloc(size);
-	if (!rtn)
-	{
-		ft_putendl_fd("Can't malloc", 2);
-		exit(2);
-	}
-	return (rtn);
+	tmp = pixel;
+	color.red = tmp >> 16;
+	color.green = (tmp << 16) >> 24;
+	color.blue = (tmp << 24) >> 24;
+	return (color);
 }
 
-int		count_array(char **array)
+int		rgb_to_pixel(t_rgb color)
 {
-	int	i;
+	int	pixel;
 
-	i = 0;
-	while (array && *array++)
-		i++;
-	return (i);
+	pixel = color.red << 16;
+	pixel += color.green << 8;
+	pixel += color.blue;
+	return (pixel);
 }
 
-char	*sanityze_str(char *str)
-{
-	char	*rtn;
 
-	rtn = str;
-	while (str && *str)
-	{
-		*str = (*str == '\t') ? ' ' : *str;
-		str++;
-	}
-	return (rtn);
-}
