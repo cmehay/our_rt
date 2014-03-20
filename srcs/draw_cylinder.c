@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/19 20:11:00 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/20 18:05:27 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	size_light_on_cyl(t_env *e, t_data *scene)
 {
 	t_pos	s;
 	t_pos	i;
+	t_pos	p;
+	t_pos	z;
 
 	i.x = e->inter.x;
 	i.y = e->inter.y;
@@ -101,12 +103,16 @@ void	size_light_on_cyl(t_env *e, t_data *scene)
 	s.x = e->shadowray.x;
 	s.y = e->shadowray.y;
 	s.z = e->shadowray.z;
+	p.x = scene->pos.x;
+	p.y = scene->pos.y;
+	p.z = scene->pos.z;
 	rt_rotate(scene, &s, &i, e);
+	rt_rotate(scene, &z, &p, e);
 	e->a = pow((s.x), 2) + pow((s.y), 2);
-	e->b = 2 * ((s.x) * (i.x - scene->pos.x)
-		+ s.y * (i.y - scene->pos.y));
-	e->c = (pow((i.x - scene->pos.x), 2)
-		+ pow((i.y - scene->pos.y), 2) - pow(scene->radius, 2));
+	e->b = 2 * ((s.x) * (i.x - p.x)
+		+ s.y * (i.y - p.y));
+	e->c = (pow((i.x - p.x), 2)
+		+ pow((i.y - p.y), 2) - pow(scene->radius, 2));
 	e->ray.delta_light = pow(e->b, 2) - 4 * e->a * e->c;
 	get_light_to_print(e);
 }
