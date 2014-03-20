@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/19 16:31:14 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/20 18:36:40 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	size_light_on_plan(t_env *e, t_data *scene);
 
 void	rt_cone(t_env *e, t_data *scene);
 int		get_cone_to_print(t_env *e, t_data *scene);
-void	lightcone(t_env *e);
+void	lightcone(t_env *e, t_data *scene);
 void	size_light_on_cone(t_env *e, t_data *scene);
 
 void	rt_cylinder(t_env *e, t_data *scene);
