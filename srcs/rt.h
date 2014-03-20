@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/18 18:39:16 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/18 19:17:48 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,18 +106,16 @@ typedef struct	s_ray
 	float	delta_light;
 }				t_ray;
 
-typedef struct s_data	t_data;
-
-struct	s_data
+typedef struct	s_data
 {
-	t_obj	obj;
-	t_pos	pos;
-	t_pos	angle;
-	float	radius;
-	t_pos	vect;
-	int		rgb[3];
-	t_data	*next;
-};
+	t_obj			obj;
+	t_pos			pos;
+	t_pos			angle;
+	float			radius;
+	t_pos			vect;
+	int				rgb[3];
+	struct s_data	*next;
+}				t_data;
 
 typedef struct	s_env
 {
@@ -174,6 +172,7 @@ void	size_light_on_plan(t_env *e, t_data *scene);
 
 void	rt_cone(t_env *e, t_data *scene);
 int		get_cone_to_print(t_env *e, t_data *scene);
+void	lightcone(t_env *e);
 void	size_light_on_cone(t_env *e, t_data *scene);
 
 void	rt_cylinder(t_env *e, t_data *scene);
@@ -198,12 +197,12 @@ int		return_parse_error(void);
 t_data	*set_cam(char **input, int line);
 t_data	*get_cam(void);
 
+void	rt_rotate(t_data *scene, t_pos *v, t_pos *o, t_env *e);
 void	downscale(t_env *e);
 
 t_rgb	pixel_to_rgb(int pixel);
 int		rgb_to_pixel(t_rgb color);
 t_hsl	rgb_to_hsl(t_rgb rgb);
 t_rgb	hsl_to_rgb(t_hsl hsl);
-
 
 #endif /* !RT_H */

@@ -6,7 +6,7 @@
 #    By: sde-segu <sde-segu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/02/24 01:47:17 by sde-segu          #+#    #+#              #
-#    Updated: 2014/02/24 01:47:18 by sde-segu         ###   ########.fr        #
+#    Updated: 2014/03/16 16:05:53 by dcouly           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -28,10 +28,12 @@ SRC =	main.c \
 		utils.c \
 		map_parser.c \
 		errors.c \
+		rotate.c \
 		cam.c \
 		mlx_utils.c \
 		downscale.c \
 		pixels.c
+
 
 OBJS = $(SCRFILES:.c=.o)
 CC = clang

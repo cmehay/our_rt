@@ -6,40 +6,11 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/16 16:02:28 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/18 19:21:43 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <stdio.h>
-
-static void	rt_cylinder_set_1(t_env *e, t_data *scene, t_pos *v, t_pos *o)
-{
-	float	mem;
-	t_pos	a;
-	t_pos	vect;
-
-	vect = e->vect;
-	a = scene->angle;
-	if (a.y)
-	{
-		mem = vect.x;
-		v->x = cos(a.y * M_PI / 180) * mem - sin(a.y * M_PI / 180) * vect.z;
-		v->z = sin(a.y * M_PI / 180) * mem + cos(a.y * M_PI / 180) * vect.z;
-		mem = o->x;
-		o->x = cos(a.y * M_PI / 180) * mem - sin(a.y * M_PI / 180) * o->z;
-		o->z = sin(a.y * M_PI / 180) * mem + cos(a.y * M_PI / 180) * o->z;
-	}
-	if (a.x)
-	{
-		mem = v->y;
-		v->y = cos(a.x * M_PI / 180) * mem + sin(a.x * M_PI / 180) * v->z;
-		v->z = sin(a.x * M_PI / 180) * mem * -1 + cos(a.x * M_PI / 180) * v->z;
-		mem = o->y;
-		o->y = cos(a.x * M_PI / 180) * mem + sin(a.x * M_PI / 180) * o->z;
-		o->z = sin(a.x * M_PI / 180) * mem * -1 + cos(a.x * M_PI / 180) * o->z;
-	}
-}
 
 void	rt_cylinder(t_env *e, t_data *scene)
 {
@@ -52,7 +23,7 @@ void	rt_cylinder(t_env *e, t_data *scene)
 	v.x = e->vect.x;
 	v.z = e->vect.z;
 	v.y = e->vect.y;
-	rt_cylinder_set_1(e, scene, &v, &o);
+	rt_rotate(scene, &v, &o, e);
 	o.x = scene->pos.x + o.x;
 	o.y = scene->pos.y + o.y;
 	o.z = scene->pos.z + o.z;
@@ -117,6 +88,6 @@ void	size_light_on_cyl(t_env *e, t_data *scene)
 		+ e->shadowray.y * (e->inter.y - scene->pos.y));
 	e->c = (pow((e->inter.x - scene->pos.x), 2)
 		+ pow((e->inter.y - scene->pos.y), 2) - pow(scene->radius, 2));
-	e->ray.delta = pow(e->b, 2) - 4 * e->a * e->c;
+	e->ray.delta_light = pow(e->b, 2) - 4 * e->a * e->c;
 	get_light_to_print(e);
 }
