@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:13 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/17 18:09:48 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/21 20:54:50 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,14 @@ int		raytracer(t_env *e, t_data **scene)
 
 int		size_ray(t_env *e)
 {
+	float	ratio;
+
 	e->pos.x = 20;
 	e->pos.y = 20 * e->ray.go.w / e->screen.render.w;
-	e->pos.z = 10 * e->ray.go.h / e->screen.render.h;
+	ratio = e->screen.render.w / e->screen.render.h;
+	if (ratio == 0.00)
+		ratio = 0.01;
+	e->pos.z = (20 / ratio) * e->ray.go.h / e->screen.render.h;
 	e->ray.len = sqrt(e->pos.x * e->pos.x + e->pos.y * e->pos.y
 		+ e->pos.z * e->pos.z);
 	e->vect.x = e->pos.x / e->ray.len;

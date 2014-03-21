@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 11:26:16 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/18 15:41:06 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/21 21:09:07 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		key_hook(int keycode)
 
 int		expose_hook(t_env *e)
 {
-	downscale(e);
 	mlx_put_image_to_window(e->mlx->mlx, e->mlx->win,
 		e->mlx->img_display, 0, 0);
 	return (0);
