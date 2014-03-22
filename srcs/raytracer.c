@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:13 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/16 15:27:39 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/22 18:14:20 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		raytracer(t_env *e, t_data **scene)
 		{
 			size_ray(e);
 			id_object(e, *scene);
-			if (e->color.red != 0 || e->color.green != 0 || e->color.blue != 0)
+			if (e->ray.inter > 0)
 				check_light(e, scene);
 			color = (e->color.red * 256 * 256) + (e->color.green * 256)
 				+ e->color.blue;
@@ -57,6 +57,9 @@ int		id_object(t_env *e, t_data *scene)
 	e->color.green = 0;
 	e->color.blue = 0;
 	e->object = 0;
+	e->angle_ob.x = 0;
+	e->angle_ob.y = 0;
+	e->angle_ob.z = 0;
 	while (scene)
 	{
 		if (scene && scene->obj == SPHERE)

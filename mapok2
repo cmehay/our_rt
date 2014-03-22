@@ -1,0 +1,25 @@
+{ cam: x(far/near) y(right/left) z(up/down) ; vectx vecty vectz ; angle_x angle_y angle_z }
+cam       -100 0 0       0 0 0       0 -40 0
+
+width 1600
+height 800
+anti-aliasing 0
+
+{ obj: x(sback/front) y(right/left) z(up/down) radius(small/big) ; red green blue ; angle_x angle_y angle_z }
+sphere -10 -20 -1 5      250 0 0 0 0 0
+cone   0 6 -2 2       250 250 50 -60 20 30
+sphere -10 20 -1 5      0 255 0 0 0 0
+cylinder 0 0 4 3     255 10 255 60 20 -30
+icylinder 10 5 0 3     50 250 50 0 0 0
+isphere   0 0 15 7    50 255 255 0 0 0
+isphere   50 -10 0 7   50 255 255 0 0 0
+plan     1 0 0 -30   120 120 250  0 0 0
+isphere  10 0 0 7       220 220 60 0 0 0
+plan    0 0 1 7      200 200 200  0 0 0
+iplan	0 1 0 20      50 250 50  0 0 0
+
+{ light: -x(back) x=0 middle +x(front) y(right/left) z(up/down) radius(small/big) light  180 -200 -98 0     0 0 0      0 0 0}
+ilight -100 0 0 5 10 0 0 0 0 0
+light -100 -40 10 5 10 0 0 0 0 0
+light -100 50 30  5 10 0 0 0 0 0
+

@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:08:57 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/19 16:06:38 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/22 17:03:07 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void	rotate_ligth(t_data *scene, t_env *e)
 	current = scene;
 	while (current)
 	{
-		if (e->angle[0])
+		if (e->angle[2])
 		{
-			mem = current->pos.y;
-			current->pos.y = cos(e->angle[0] * M_PI / 180) * mem + sin(e->angle[0] * M_PI / 180) * current->pos.z;
-			current->pos.z = -sin(e->angle[0] * M_PI / 180) * mem + cos(e->angle[0] * M_PI / 180) * current->pos.z;
+			mem = current->pos.x;
+			current->pos.x = cos(e->angle[2] * M_PI / 180) * mem + sin(e->angle[2] * M_PI / 180) * current->pos.y;
+			current->pos.y = -sin(e->angle[2] * M_PI / 180) * mem + cos(e->angle[2] * M_PI / 180) * current->pos.y;
 		}
 		if (e->angle[1])
 		{
@@ -33,11 +33,11 @@ static void	rotate_ligth(t_data *scene, t_env *e)
 			current->pos.x = cos(e->angle[1] * M_PI / 180) * mem + sin(e->angle[1] * M_PI / 180) * current->pos.z;
 			current->pos.z = -sin(e->angle[1] * M_PI / 180) * mem + cos(e->angle[1] * M_PI / 180) * current->pos.z;
 		}
-		if (e->angle[2])
+		if (e->angle[0])
 		{
-			mem = current->pos.x;
-			current->pos.x = cos(e->angle[2] * M_PI / 180) * mem + sin(e->angle[2] * M_PI / 180) * current->pos.y;
-			current->pos.y = -sin(e->angle[2] * M_PI / 180) * mem + cos(e->angle[2] * M_PI / 180) * current->pos.y;
+			mem = current->pos.y;
+			current->pos.y = cos(e->angle[0] * M_PI / 180) * mem + sin(e->angle[0] * M_PI / 180) * current->pos.z;
+			current->pos.z = -sin(e->angle[0] * M_PI / 180) * mem + cos(e->angle[0] * M_PI / 180) * current->pos.z;
 		}
 		current = current->next;
 	}

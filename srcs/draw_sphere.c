@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:25 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/19 15:23:25 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/22 18:56:15 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,16 @@ void	lightsphere(t_env *e)
 	e->normal.y = y / len;
 	e->normal.z = z / len;
 	scal = (e->normal.x * e->shadowray.x + e->normal.y * e->shadowray.y
-		+ e->normal.z * e->shadowray.z) / (e->ray.len / 40);
-	scal = (scal < 0.001) ? 0.001 : scal;
+		+ e->normal.z * e->shadowray.z) / (e->ray.len / 60);
+	x = scal * (e->ray.len / 60);
+	if (scal > 0.2)
+		e->light_bis = fmax(pow(x, 70), e->light_bis);
+	scal = (scal < 0.05) ? 0.05 : scal;
 	scal = (scal > 1) ? 1 : scal;
 	e->light *= scal;
 }
 
-void	size_light_on_sphere(t_env *e, t_data *scene)
+int		size_light_on_sphere(t_env *e, t_data *scene)
 {
 	e->a = pow((e->shadowray.x), 2) + pow((e->shadowray.y), 2)
 		+ pow((e->shadowray.z), 2);
@@ -83,10 +86,10 @@ void	size_light_on_sphere(t_env *e, t_data *scene)
 		+ pow((e->inter.y - scene->pos.y), 2)
 		+ pow((e->inter.z - scene->pos.z), 2) - pow(scene->radius, 2));
 	e->ray.delta_light = pow(e->b, 2) - 4 * e->a * e->c;
-	get_light_to_print(e);
+	return (get_light_to_print(e));
 }
 
-void	get_light_to_print(t_env *e)
+int		get_light_to_print(t_env *e)
 {
 	float	inter;
 	float	inter2;
@@ -103,6 +106,7 @@ void	get_light_to_print(t_env *e)
 		max = fmax(inter2, inter);
 		if (min > 0.1 && (max < e->lenght))
 		{
+			e->light_bis = 0;
 			e->ray.inter_light = min;
 			if (e->color.red > 20)
 				e->color.red /= 2;
@@ -110,6 +114,8 @@ void	get_light_to_print(t_env *e)
 				e->color.green /= 2;
 			if (e->color.blue > 20)
 				e->color.blue /= 2;
+			return (1);
 		}
 	}
+	return (0);
 }
