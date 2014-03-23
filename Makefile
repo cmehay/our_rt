@@ -34,7 +34,6 @@ SRC =	main.c \
 		downscale.c \
 		pixels.c
 
-
 OBJS = $(SCRFILES:.c=.o)
 CC = clang
 CFLAGS = -g -Wall -Werror -Wextra

@@ -6,16 +6,22 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/18 17:18:39 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/23 20:06:14 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <stdio.h>
 
 int		check_light(t_env *e, t_data **scene)
 {
 	t_data	*tmp;
+	int		two_light;
+	float	mem;
 
+	e->light = 1;
+	mem = 0;
+	two_light = 0;
 	tmp = *scene;
 	e->inter.x = e->cam.x + (e->vect.x * e->ray.inter);
 	e->inter.y = e->cam.y + (e->vect.y * e->ray.inter);
@@ -26,10 +32,30 @@ int		check_light(t_env *e, t_data **scene)
 		if (tmp && tmp->obj == LIGHT)
 		{
 			size_raylight(e, tmp);
-			id_object_for_light(e, scene);
+			if (id_object_for_light(e, scene) == 0)
+				mem = e->light_bis;
+			two_light++;
 		}
 		tmp = tmp->next;
 	}
+	while (--two_light)
+		e->light = sqrt(e->light);
+	e->color.red *= e->light;
+	e->color.green *= e->light;
+	e->color.blue *= e->light;
+	if (mem > 0)
+	{
+		e->color.red += 255 * mem;
+		e->color.blue += 255 * mem;
+		e->color.green += 255 * mem;
+	}
+	e->light_bis = 0;
+	if (e->color.red > 255)
+		e->color.red = 255;
+	if (e->color.blue > 255)
+		e->color.blue = 255;
+	if (e->color.green > 255)
+		e->color.green = 255;
 	return (0);
 }
 #include <stdio.h>
@@ -51,10 +77,12 @@ void	size_raylight(t_env *e, t_data *scene)
 	e->shadowray.z = z / len;
 }
 
-void	id_object_for_light(t_env *e, t_data **scene)
+int		id_object_for_light(t_env *e, t_data **scene)
 {
 	t_data	*tmp;
+	int		ombre;
 
+	ombre = 0;
 	tmp = *scene;
 	e->ray.inter_light = -1;
 	if (e->object == 1)
@@ -64,17 +92,18 @@ void	id_object_for_light(t_env *e, t_data **scene)
 	if (e->object == 3)
 		lightcylinder(e);
 	if (e->object == 4)
-		lightcone(e);
+		lightcylinder(e);
 	while (tmp)
 	{
 		if (tmp && tmp->obj == SPHERE)
-			size_light_on_sphere(e, tmp);
+			ombre += size_light_on_sphere(e, tmp);
 		if (tmp && tmp->obj == PLAN)
-			size_light_on_plan(e, tmp);
+			ombre += size_light_on_plan(e, tmp);
 		if (tmp && tmp->obj == CYLINDER)
-			size_light_on_cyl(e, tmp);
+			ombre += size_light_on_cyl(e, tmp);
 		if (tmp && tmp->obj == CONE)
-			size_light_on_cone(e, tmp);
+			ombre += size_light_on_cone(e, tmp);
 		tmp = tmp->next;
 	}
+	return (ombre);
 }

@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/01 02:13:06 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/18 18:22:07 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/23 20:08:55 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int		rt_plan(t_env *e, t_data *scene)
 		e->color.red = scene->rgb[0];
 		e->color.green = scene->rgb[1];
 		e->color.blue = scene->rgb[2];
+		e->angle_ob.x = scene->angle.x;
+		e->angle_ob.y = scene->angle.y;
+		e->angle_ob.z = scene->angle.z;
 		e->object = 2;
 		e->heart_plan[0] = scene->pos.x;
 		if (scene->radius < 0)
@@ -67,17 +70,15 @@ int		lightplan(t_env *e)
 	x = e->heart_plan[0] / len;
 	y = e->heart_plan[1] / len;
 	z = e->heart_plan[2] / len;
-	scal = (x * e->shadowray.x
-	 + y * e->shadowray.y
-	 + z * e->shadowray.z);
-	scal = (scal < 0.2) ? 0.2 : scal;
-	e->color.red *= scal;
-	e->color.green *= scal;
-	e->color.blue *= scal;
+	scal = 60 / (e->ray.len);
+	scal = (scal > 1) ? 1 : scal;
+	e->light *= scal;
+	x = x * e->shadowray.x + y * e->shadowray.y + z * e->shadowray.z;
+	e->light_bis = fmax(pow(x, 1600), e->light_bis);
 	return (0);
 }
 
-void	size_light_on_plan(t_env *e, t_data *scene)
+int		size_light_on_plan(t_env *e, t_data *scene)
 {
 	float	inter;
 	float	x;
@@ -98,5 +99,7 @@ void	size_light_on_plan(t_env *e, t_data *scene)
 			e->color.green /= 2;
 		if (e->color.red > 20)
 			e->color.red /= 2;
+		return (1);
 	}
+	return (0);
 }

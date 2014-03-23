@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:31 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/17 16:58:31 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/23 20:07:53 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	rt_cone(t_env *e, t_data *scene)
 {
 	t_pos	v;
 	t_pos	o;
+	t_pos	a;
 
 	o.x = e->cam.x - scene->pos.x;
 	o.z = e->cam.z - scene->pos.z;
@@ -23,6 +24,12 @@ void	rt_cone(t_env *e, t_data *scene)
 	v.x = e->vect.x;
 	v.z = e->vect.z;
 	v.y = e->vect.y;
+	a.x = e->angle[0];
+	a.y = -e->angle[1];
+	a.z = e->angle[2];
+	rt_rotate_x(&a, &v, &o, e);
+	rt_rotate_y(&a, &v, &o, e);
+	rt_rotate_z(&a, &v, &o, e);
 	rt_rotate(scene, &v, &o, e);
 	o.x = scene->pos.x + o.x;
 	o.y = scene->pos.y + o.y;
@@ -50,6 +57,12 @@ int		get_cone_to_print(t_env *e, t_data *scene)
 		: fmax(inter1, inter2);
 	if (((e->ray.inter == -1) || e->ray.inter > inter2) && inter2 > 0.01)
 	{
+		e->angle_ob.x = scene->angle.x;
+		e->angle_ob.y = scene->angle.y;
+		e->angle_ob.z = scene->angle.z;
+		e->heart_sphere[0] = scene->pos.x;
+		e->heart_sphere[1] = scene->pos.y;
+		e->heart_sphere[2] = scene->pos.z;
 		e->ray.inter = inter2;
 		e->object = 4;
 		e->color.red = scene->rgb[0];
@@ -59,39 +72,67 @@ int		get_cone_to_print(t_env *e, t_data *scene)
 	return (0);
 }
 
-void	lightcone(t_env *e)
+void	lightcone(t_env *e, t_data *scene)
 {
 	float	len;
-	float	x;
-	float	y;
-	float	z;
+	t_pos	nor;
+	t_pos	p;
 	float	scal;
 
-	x = e->inter.x - e->heart_sphere[0];
-	y = e->inter.y - e->heart_sphere[1];
-	z = 0;
-	len = sqrt(x * x + y * y + z * z);
-	e->normal.x = x / len;
-	e->normal.y = y / len;
-	e->normal.z = z / len;
-	scal = (e->normal.x * e->shadowray.x + e->normal.y * e->shadowray.y
-			+ e->normal.z * e->shadowray.z);
-	scal = (scal < 0.2) ? 0.2 : scal;
-	e->color.red *= scal;
-	e->color.green *= scal;
-	e->color.blue *= scal;
+	nor.x = e->inter.x - e->heart_sphere[0];
+	nor.y = e->inter.y - e->heart_sphere[1];
+	nor.z = 0;
+	len = sqrt(nor.x * nor.x + nor.y * nor.y + nor.z * nor.z);
+	e->normal.x = nor.x / len;
+	e->normal.y = nor.y / len;
+	e->normal.z = nor.z / len;
+	p.x = e->shadowray.x;
+	p.y = e->shadowray.y;
+	p.z = e->shadowray.z;
+	rt_rotate(scene, &nor, &p, e);
+	scal = (e->normal.x * p.x + e->normal.y * p.y
+			+ e->normal.z * p.z) / (e->ray.len / 50);
+	scal = (scal > 1) ? 1 : scal;
+	scal = (scal < 0.05) ? 0.05 : scal;
+	e->light *= scal;
 }
 
-void	size_light_on_cone(t_env *e, t_data *scene)
+int		size_light_on_cone(t_env *e, t_data *scene)
 {
-	e->a = pow((e->shadowray.x), 2) + pow((e->shadowray.y), 2)
-		- pow((e->shadowray.z), 2);
-	e->b = 2 * ((e->shadowray.x) * (e->inter.x - scene->pos.x)
-		+ e->shadowray.y * (e->inter.y - scene->pos.y)
-		+ (e->shadowray.z) * (e->inter.z - scene->pos.z));
-	e->c = pow((e->inter.x - scene->pos.x), 2)
-		+ pow((e->inter.y - scene->pos.y), 2)
-		- pow((e->inter.z - scene->pos.z), 2);
-	e->ray.delta = pow(e->b, 2) - 4 * e->a * e->c;
-	get_light_to_print(e);
+	t_pos	v;
+	t_pos	i;
+	t_pos	p;
+	t_pos	a;
+	t_pos	z;
+
+	a.x = e->angle[0];
+	a.y = -e->angle[1];
+	a.z = e->angle[2];
+	v.x = e->shadowray.x;
+	v.y = e->shadowray.y;
+	v.z = e->shadowray.z;
+	i.x = e->inter.x;
+	i.y = e->inter.y;
+	i.z = e->inter.z;
+	p.x = scene->pos.x;
+	p.y = scene->pos.y;
+	p.z = scene->pos.z;
+	rt_rotate_x(&a, &v, &i, e);
+	rt_rotate_x(&a, &z, &p, e);
+	rt_rotate_y(&a, &v, &i, e);
+	rt_rotate_y(&a, &z, &p, e);
+	rt_rotate_z(&a, &v, &i, e);
+	rt_rotate_z(&a, &z, &p, e);
+	rt_rotate(scene, &v, &i, e);
+	rt_rotate(scene, &z, &p, e);
+	e->a = pow((v.x), 2) + pow((v.y), 2)
+		- pow((v.z), 2) * pow(scene->radius, 2) / 100;
+	e->b = 2 * ((v.x) * (i.x - p.x)
+			+ v.y * (i.y - p.y)
+			- (v.z) * (i.z - p.z) * pow(scene->radius, 2) / 100);
+	e->c = pow((i.x - p.x), 2)
+		+ pow((i.y - p.y), 2)
+		- pow((i.z - p.z), 2) * pow(scene->radius, 2) / 100;
+	e->ray.delta_light = pow(e->b, 2) - (4 * e->a * e->c);
+	return (get_light_to_print(e));
 }

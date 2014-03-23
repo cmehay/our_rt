@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:38 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/18 19:02:21 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 20:20:27 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	set_screen(t_env *e)
 		: PRESET_HEIGHT;
 	e->screen.render.w = (int)e->screen.display.w << e->screen.upscale;
 	e->screen.render.h = (int)e->screen.display.h << e->screen.upscale;
+	e->screen.length = 20;
 }
 
 static void	set_mlx_struct(t_env *e)
