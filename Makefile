@@ -6,7 +6,7 @@
 #    By: sde-segu <sde-segu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/02/24 01:47:17 by sde-segu          #+#    #+#              #
-#    Updated: 2014/03/16 16:05:53 by dcouly           ###   ########.fr        #
+#    Updated: 2014/03/23 19:10:24 by dcouly           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -32,11 +32,12 @@ SRC =	main.c \
 		cam.c \
 		mlx_utils.c \
 		downscale.c \
-		pixels.c
+		pixels.c \
+		progress.c
 
 OBJS = $(SCRFILES:.c=.o)
 CC = clang
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra -O3
 LDFLAGS = -L libft/ -lft -L/usr/X11/lib -lXext -lX11 -lmlx -lm
 LIBFT = libft/libft.a
 

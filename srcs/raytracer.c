@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:13 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 20:17:08 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 21:17:11 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		raytracer(t_env *e, t_data **scene)
 		e->ray.go.w = -(int)e->screen.render.w / 2;
 		while (e->ray.go.w < (int)e->screen.render.w / 2)
 		{
+			display_progress(e->screen.render.h, e->screen.render.w);
 			size_ray(e);
 			id_object(e, *scene);
 			if (e->ray.inter > 0)

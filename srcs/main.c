@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:08:57 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 20:16:21 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 21:42:36 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int			main(int argc, char **argv)
 			rotate_ligth(scene, e);
 			raytracer(e, &scene);
 			downscale(e);
+			display_done();
 			mlx_key_hook(e->mlx->win, key_hook, e);
 			mlx_loop(e->mlx->mlx);
 		}

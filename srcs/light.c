@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 20:06:14 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 20:56:11 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		check_light(t_env *e, t_data **scene)
 	int		two_light;
 	float	mem;
 
+	mem = 0;
 	e->light = 1;
 	mem = 0;
 	two_light = 0;

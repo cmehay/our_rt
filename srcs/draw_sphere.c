@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:25 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 20:15:20 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 20:56:22 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,26 @@ int		get_inter_to_print(t_env *e, t_data *scene)
 	return (0);
 }
 
+#include <stdio.h>
+
 void	lightsphere(t_env *e)
 {
 	float	len;
-	float	x;
-	float	y;
-	float	z;
+	t_pos	nor;
 	float	scal;
 
-	x = e->inter.x - e->heart_sphere[0];
-	y = e->inter.y - e->heart_sphere[1];
-	z = e->inter.z - e->heart_sphere[2];
-	len = sqrt(x * x + y * y + z * z);
-	e->normal.x = x / len;
-	e->normal.y = y / len;
-	e->normal.z = z / len;
+	nor.x = e->inter.x - e->heart_sphere[0];
+	nor.y = e->inter.y - e->heart_sphere[1];
+	nor.z = e->inter.z - e->heart_sphere[2];
+	len = sqrt(nor.x * nor.x + nor.y * nor.y + nor.z * nor.z);
+	e->normal.x = nor.x / len;
+	e->normal.y = nor.y / len;
+	e->normal.z = nor.z / len;
 	scal = (e->normal.x * e->shadowray.x + e->normal.y * e->shadowray.y
-		+ e->normal.z * e->shadowray.z) / (e->ray.len / 60);
-	x = scal * (e->ray.len / 60);
+		+ e->normal.z * e->shadowray.z);
 	if (scal > 0.2)
-		e->light_bis = fmax(pow(x, 70), e->light_bis);
+		e->light_bis = fmax(pow(scal, 60), e->light_bis);
+	scal = scal / (e->ray.len / 60);
 	scal = (scal < 0.05) ? 0.05 : scal;
 	scal = (scal > 1) ? 1 : scal;
 	e->light *= scal;

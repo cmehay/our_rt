@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 20:07:43 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 21:42:49 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int		size_light_on_plan(t_env *e, t_data *scene);
 
 void	rt_cone(t_env *e, t_data *scene);
 int		get_cone_to_print(t_env *e, t_data *scene);
-void	lightcone(t_env *e, t_data *scene);
+void	lightcone(t_env *e);
 int		size_light_on_cone(t_env *e, t_data *scene);
 
 void	rt_cylinder(t_env *e, t_data *scene);
@@ -210,5 +210,8 @@ void	rt_rotate2(t_pos *v, t_pos *o, t_env *e);
 void	rt_rotate_y(t_pos *a, t_pos *v, t_pos *o, t_env *e);
 void	rt_rotate_x(t_pos *a, t_pos *v, t_pos *o, t_env *e);
 void	rt_rotate_z(t_pos *a, t_pos *v, t_pos *o, t_env *e);
+
+void	display_progress(int height, int weight);
+void	display_done(void);
 
 #endif /* !RT_H */
