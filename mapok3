@@ -16,7 +16,7 @@ plan    0 0 1 20      250 50 50  0 0 0
 iplan	0 1 0 20      50 250 50  0 0 0
 
 { light: -x(back) x=0 middle +x(front) y(right/left) z(up/down) radius(small/big) light  180 -200 -98 0     0 0 0      0 0 0}
-light -80 10 30 5 10 0 0 0 0 0
-light -50 20 30 5 10 0 0 0 0 0
-light -70 50 20 5 10 0 0 0 0 0
+light -80 50 25 5 10 0 0 0 0 0
+light -40 0 15 5 10 0 0 0 0 0
+light -70 10 20 5 10 0 0 0 0 0
 

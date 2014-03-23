@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 15:32:38 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 20:20:37 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	lightcylinder(t_env *e)
 	scal = (e->normal.x * s.x + e->normal.y * s.y
 		 + e->normal.z * s.z) / (e->ray.len / 60);
 	if (scal > 0.2)
-		e->light_bis = fmax(pow(scal * (e->ray.len / 60), 20), e->light_bis);
+		e->light_bis = fmax(pow(scal * (e->ray.len / 60), 60), e->light_bis);
 	scal = (scal > 1) ? 1 : scal;
 	scal = (scal < 0.05) ? 0.05 : scal;
 	e->light *= scal;
