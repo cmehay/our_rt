@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/20 22:45:27 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 15:12:41 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,9 @@ typedef struct	s_env
 	float		heart_sphere[3];
 	float		heart_plan[4];
 	float		angle[3];
+	t_pos		angle_ob;
 	float		light;
+	float		light_bis;
 }				t_env;
 
 t_data	*get_infos(t_env *e, int fd);
@@ -159,27 +161,27 @@ int		id_object(t_env *e, t_data *scene);
 
 int		check_light(t_env *e, t_data **scene);
 void	size_raylight(t_env *e, t_data *scene);
-void	id_object_for_light(t_env *e, t_data **scene);
+int		id_object_for_light(t_env *e, t_data **scene);
 
 int		rt_sphere(t_env *e, t_data *scene);
 int		get_inter_to_print(t_env *e, t_data *scene);
-void	size_light_on_sphere(t_env *e, t_data *scene);
-void	get_light_to_print(t_env *e);
+int		size_light_on_sphere(t_env *e, t_data *scene);
+int		get_light_to_print(t_env *e);
 void	lightsphere(t_env *e);
 
 int		rt_plan(t_env *e, t_data *scene);
 int		lightplan(t_env *e);
-void	size_light_on_plan(t_env *e, t_data *scene);
+int		size_light_on_plan(t_env *e, t_data *scene);
 
 void	rt_cone(t_env *e, t_data *scene);
 int		get_cone_to_print(t_env *e, t_data *scene);
 void	lightcone(t_env *e, t_data *scene);
-void	size_light_on_cone(t_env *e, t_data *scene);
+int		size_light_on_cone(t_env *e, t_data *scene);
 
 void	rt_cylinder(t_env *e, t_data *scene);
 int		get_cyl_to_print(t_env *e, t_data *scene);
-void	lightcylinder(t_env *e, t_data *scene);
-void	size_light_on_cyl(t_env *e, t_data *scene);
+void	lightcylinder(t_env *e);
+int		size_light_on_cyl(t_env *e, t_data *scene);
 
 void	*safe_malloc(size_t size);
 int		count_array(char **array);
@@ -201,5 +203,10 @@ void	downscale(t_env *e);
 
 t_rgb	pixel_to_rgb(int pixel);
 int		rgb_to_pixel(t_rgb color);
+
+void	rt_rotate2(t_pos *v, t_pos *o, t_env *e);
+void	rt_rotate_y(t_pos *a, t_pos *v, t_pos *o, t_env *e);
+void	rt_rotate_x(t_pos *a, t_pos *v, t_pos *o, t_env *e);
+void	rt_rotate_z(t_pos *a, t_pos *v, t_pos *o, t_env *e);
 
 #endif /* !RT_H */
