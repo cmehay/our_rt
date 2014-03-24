@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 21:42:49 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/24 16:03:50 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define OBJ_CYLINDER "cylinder"
 # define OBJ_CONE "cone"
 # define OBJ_PLAN "plan"
+# define OBJ_DSPHERE "dsphere"
 # define OBJ_ALIASING "anti-aliasing"
 # define OBJ_HEIGHT "height"
 # define OBJ_WIDTH "width"
@@ -40,6 +41,7 @@ typedef enum	e_obj
 	CYLINDER,
 	CONE,
 	PLAN,
+	DSPHERE,
 	LIGHT,
 	ANTIALIASING,
 	HEIGHT,

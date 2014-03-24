@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 20:56:11 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/24 15:58:49 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		id_object_for_light(t_env *e, t_data **scene)
 	if (e->object == 3)
 		lightcylinder(e);
 	if (e->object == 4)
-		lightcylinder(e);
+		lightcone(e);
 	while (tmp)
 	{
 		if (tmp && tmp->obj == SPHERE)
