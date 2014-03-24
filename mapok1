@@ -7,7 +7,7 @@ anti-aliasing 2
 
 { obj: x(sback/front) y(right/left) z(up/down) radius(small/big) ; red green blue ; angle_x angle_y angle_z }
 sphere -10 -20 -1 5      250 0 0 0 0 0
-cone   0 6 -2 2       250 250 50 -60 0  30
+cone   0 6 -2 10       250 250 50 -60 0  30
 sphere -10 20 -1 5      0 255 0 0 0 0
 cylinder 0 0 4 3     255 10 255 60 0 -30
 icylinder 10 5 0 3     50 250 50 0 0 0
