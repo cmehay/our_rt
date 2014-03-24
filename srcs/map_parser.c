@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/15 14:37:00 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/21 20:59:58 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/24 16:04:25 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	**gimme_obj_list(void)
 		OBJ_CYLINDER,
 		OBJ_CONE,
 		OBJ_PLAN,
+		OBJ_DSPHERE,
 		OBJ_LIGHT,
 		OBJ_ALIASING,
 		OBJ_HEIGHT,

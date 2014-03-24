@@ -3,7 +3,7 @@ cam       -100 0 0       0 0 0       0 -40 0
 
 width 1600
 height 800
-anti-aliasing 0
+anti-aliasing 2
 
 { obj: x(sback/front) y(right/left) z(up/down) radius(small/big) ; red green blue ; angle_x angle_y angle_z }
 sphere -10 -20 -1 5      250 0 0 0 0 0

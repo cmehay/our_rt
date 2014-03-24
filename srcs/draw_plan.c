@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/01 02:13:06 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 15:13:20 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 20:08:55 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		rt_plan(t_env *e, t_data *scene)
 	}
 	return (0);
 }
+
 
 int		lightplan(t_env *e)
 {

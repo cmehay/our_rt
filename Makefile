@@ -6,7 +6,7 @@
 #    By: sde-segu <sde-segu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/02/24 01:47:17 by sde-segu          #+#    #+#              #
-#    Updated: 2014/03/24 15:59:03 by dcouly           ###   ########.fr        #
+#    Updated: 2014/03/24 16:10:02 by dcouly           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -33,7 +33,8 @@ SRC =	main.c \
 		cam.c \
 		mlx_utils.c \
 		downscale.c \
-		pixels.c
+		pixels.c \
+		progress.c
 
 OBJS = $(SCRFILES:.c=.o)
 CC = clang

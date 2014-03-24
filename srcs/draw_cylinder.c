@@ -6,12 +6,11 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/24 15:08:56 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/24 15:59:04 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <stdio.h>
 
 void	rt_cylinder(t_env *e, t_data *scene)
 {

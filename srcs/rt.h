@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/24 15:59:47 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/24 16:09:46 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define OBJ_CYLINDER "cylinder"
 # define OBJ_CONE "cone"
 # define OBJ_PLAN "plan"
+# define OBJ_DSPHERE "dsphere"
 # define OBJ_ALIASING "anti-aliasing"
 # define OBJ_HEIGHT "height"
 # define OBJ_WIDTH "width"
@@ -40,6 +41,7 @@ typedef enum	e_obj
 	CYLINDER,
 	CONE,
 	PLAN,
+	DSPHERE,
 	LIGHT,
 	ANTIALIASING,
 	HEIGHT,
@@ -191,6 +193,8 @@ int		size_light_on_cyl(t_env *e, t_data *scene);
 void	*safe_malloc(size_t size);
 int		count_array(char **array);
 char	*sanityze_str(char *str);
+int		min_three(int a, int b, int c);
+int		max_three(int a, int b, int c);
 
 char	**gimme_obj_list(void);
 t_obj	parse_object(char *input);
@@ -213,5 +217,8 @@ void	rt_rotate2(t_pos *v, t_pos *o, t_env *e);
 void	rt_rotate_y(t_pos *a, t_pos *v, t_pos *o, t_env *e);
 void	rt_rotate_x(t_pos *a, t_pos *v, t_pos *o, t_env *e);
 void	rt_rotate_z(t_pos *a, t_pos *v, t_pos *o, t_env *e);
+
+void	display_progress(int height, int weight);
+void	display_done(void);
 
 #endif /* !RT_H */

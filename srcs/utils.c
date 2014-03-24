@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/13 14:12:41 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/20 22:44:50 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/23 20:20:37 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,29 @@ char	*sanityze_str(char *str)
 		*str = (*str == '\t') ? ' ' : *str;
 		str++;
 	}
+	return (rtn);
+}
+
+int		min_three(int a, int b, int c)
+{
+	int	rtn;
+
+	rtn = a;
+	if (b < rtn)
+		rtn = b;
+	if (c < rtn)
+		rtn = c;
+	return (rtn);
+}
+
+int		max_three(int a, int b, int c)
+{
+	int	rtn;
+
+	rtn = a;
+	if (b > rtn)
+		rtn = b;
+	if (c > rtn)
+		rtn = c;
 	return (rtn);
 }

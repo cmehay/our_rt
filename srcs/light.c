@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/24 14:22:32 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/24 15:58:49 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		check_light(t_env *e, t_data **scene)
 
 	mem = 0;
 	e->light = 1;
+	mem = 0;
 	two_light = 0;
 	tmp = *scene;
 	e->inter.x = e->cam.x + (e->vect.x * e->ray.inter);
@@ -58,6 +59,7 @@ int		check_light(t_env *e, t_data **scene)
 		e->color.green = 255;
 	return (0);
 }
+#include <stdio.h>
 
 void	size_raylight(t_env *e, t_data *scene)
 {

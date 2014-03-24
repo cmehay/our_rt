@@ -1,7 +1,7 @@
 { cam: x(far/near) y(right/left) z(up/down) ; vectx vecty vectz ; angle_x angle_y angle_z }
 cam       -100 0 0       0 0 0       0 0 0
 
-width 1600
+width 800
 height 800
 anti-aliasing 2
 
