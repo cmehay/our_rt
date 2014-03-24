@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:13 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 15:35:10 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/24 16:03:51 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int		id_object(t_env *e, t_data *scene)
 			rt_cone(e, scene);
 		if (scene && scene->obj == CYLINDER)
 			rt_cylinder(e, scene);
+		if (scene && scene->obj == DSPHERE)
+			rt_demi_sphere(e, scene);
 		scene = scene->next;
 	}
 	return (0);

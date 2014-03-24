@@ -6,7 +6,7 @@
 #    By: sde-segu <sde-segu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/02/24 01:47:17 by sde-segu          #+#    #+#              #
-#    Updated: 2014/03/23 19:10:24 by dcouly           ###   ########.fr        #
+#    Updated: 2014/03/24 15:59:03 by dcouly           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -22,6 +22,7 @@ SRC =	main.c \
 		raytracer.c \
 		light.c \
 		draw_sphere.c \
+		draw_demi_sphere.c \
 		draw_plan.c \
 		draw_cone.c \
 		draw_cylinder.c \
