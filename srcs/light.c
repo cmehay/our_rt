@@ -6,12 +6,34 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/24 15:58:49 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/24 19:24:33 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <stdio.h>
+
+static void	glow(t_env *e, float mem, int two_light)
+{
+	while (--two_light)
+		e->light = sqrt(e->light);
+	e->color.red *= e->light;
+	e->color.green *= e->light;
+	e->color.blue *= e->light;
+	if (mem > 0)
+	{
+		e->color.red += 255 * mem;
+		e->color.blue += 255 * mem;
+		e->color.green += 255 * mem;
+	}
+	e->light_bis = 0;
+	if (e->color.red > 255)
+		e->color.red = 255;
+	if (e->color.blue > 255)
+		e->color.blue = 255;
+	if (e->color.green > 255)
+		e->color.green = 255;
+}
 
 int		check_light(t_env *e, t_data **scene)
 {
@@ -19,7 +41,6 @@ int		check_light(t_env *e, t_data **scene)
 	int		two_light;
 	float	mem;
 
-	mem = 0;
 	e->light = 1;
 	mem = 0;
 	two_light = 0;
@@ -39,27 +60,9 @@ int		check_light(t_env *e, t_data **scene)
 		}
 		tmp = tmp->next;
 	}
-	while (--two_light)
-		e->light = sqrt(e->light);
-	e->color.red *= e->light;
-	e->color.green *= e->light;
-	e->color.blue *= e->light;
-	if (mem > 0)
-	{
-		e->color.red += 255 * mem;
-		e->color.blue += 255 * mem;
-		e->color.green += 255 * mem;
-	}
-	e->light_bis = 0;
-	if (e->color.red > 255)
-		e->color.red = 255;
-	if (e->color.blue > 255)
-		e->color.blue = 255;
-	if (e->color.green > 255)
-		e->color.green = 255;
+	glow(e, mem, two_light);
 	return (0);
 }
-#include <stdio.h>
 
 void	size_raylight(t_env *e, t_data *scene)
 {
