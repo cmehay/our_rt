@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/24 16:09:46 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/24 17:04:22 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	size_raylight(t_env *e, t_data *scene);
 int		id_object_for_light(t_env *e, t_data **scene);
 
 int		rt_demi_sphere(t_env *e, t_data *scene);
-int		get_demi_to_print(t_env *e, t_data *scene);
+int		get_demi_to_print(t_env *e, t_data *scene, t_pos v);
 int		size_light_on_demi_sphere(t_env *e, t_data *scene);
 void	lightdemisphere(t_env *e);
 

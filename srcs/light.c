@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/24 15:58:49 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/24 20:20:44 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int		id_object_for_light(t_env *e, t_data **scene)
 		lightcylinder(e);
 	if (e->object == 4)
 		lightcone(e);
+	if (e->object == 5)
+		lightdemisphere(e);
 	while (tmp)
 	{
 		if (tmp && tmp->obj == SPHERE)
@@ -104,6 +106,8 @@ int		id_object_for_light(t_env *e, t_data **scene)
 			ombre += size_light_on_cyl(e, tmp);
 		if (tmp && tmp->obj == CONE)
 			ombre += size_light_on_cone(e, tmp);
+		if (tmp && tmp->obj == DSPHERE)
+			ombre += size_light_on_demi_sphere(e, tmp);
 		tmp = tmp->next;
 	}
 	return (ombre);
