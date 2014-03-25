@@ -6,12 +6,34 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/24 20:20:44 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/25 15:27:42 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <stdio.h>
+
+static void	glow(t_env *e, float mem, int two_light)
+{
+	while (--two_light)
+		e->light = sqrt(e->light);
+	e->color.red *= e->light;
+	e->color.green *= e->light;
+	e->color.blue *= e->light;
+	if (mem > 0)
+	{
+		e->color.red += 255 * mem;
+		e->color.blue += 255 * mem;
+		e->color.green += 255 * mem;
+	}
+	e->light_bis = 0;
+	if (e->color.red > 255)
+		e->color.red = 255;
+	if (e->color.blue > 255)
+		e->color.blue = 255;
+	if (e->color.green > 255)
+		e->color.green = 255;
+}
 
 int		check_light(t_env *e, t_data **scene)
 {
@@ -19,7 +41,6 @@ int		check_light(t_env *e, t_data **scene)
 	int		two_light;
 	float	mem;
 
-	mem = 0;
 	e->light = 1;
 	mem = 0;
 	two_light = 0;
@@ -39,27 +60,9 @@ int		check_light(t_env *e, t_data **scene)
 		}
 		tmp = tmp->next;
 	}
-	while (--two_light)
-		e->light = sqrt(e->light);
-	e->color.red *= e->light;
-	e->color.green *= e->light;
-	e->color.blue *= e->light;
-	if (mem > 0)
-	{
-		e->color.red += 255 * mem;
-		e->color.blue += 255 * mem;
-		e->color.green += 255 * mem;
-	}
-	e->light_bis = 0;
-	if (e->color.red > 255)
-		e->color.red = 255;
-	if (e->color.blue > 255)
-		e->color.blue = 255;
-	if (e->color.green > 255)
-		e->color.green = 255;
+	glow(e, mem, two_light);
 	return (0);
 }
-#include <stdio.h>
 
 void	size_raylight(t_env *e, t_data *scene)
 {
@@ -78,12 +81,30 @@ void	size_raylight(t_env *e, t_data *scene)
 	e->shadowray.z = z / len;
 }
 
+static void	size_light(t_env *e, t_data *tmp, int *shadow)
+{
+	while (tmp)
+	{
+		if (tmp && tmp->obj == SPHERE)
+			shadow += size_light_on_sphere(e, tmp);
+		if (tmp && tmp->obj == PLAN)
+			shadow += size_light_on_plan(e, tmp);
+		if (tmp && tmp->obj == CYLINDER)
+			shadow += size_light_on_cyl(e, tmp);
+		if (tmp && tmp->obj == CONE)
+			shadow += size_light_on_cone(e, tmp);
+		if (tmp && tmp->obj == DSPHERE)
+			shadow += size_light_on_demi_sphere(e, tmp);
+		tmp = tmp->next;
+	}
+}
+
 int		id_object_for_light(t_env *e, t_data **scene)
 {
 	t_data	*tmp;
-	int		ombre;
+	int		shadow;
 
-	ombre = 0;
+	shadow = 0;
 	tmp = *scene;
 	e->ray.inter_light = -1;
 	if (e->object == 1)
@@ -96,19 +117,6 @@ int		id_object_for_light(t_env *e, t_data **scene)
 		lightcone(e);
 	if (e->object == 5)
 		lightdemisphere(e);
-	while (tmp)
-	{
-		if (tmp && tmp->obj == SPHERE)
-			ombre += size_light_on_sphere(e, tmp);
-		if (tmp && tmp->obj == PLAN)
-			ombre += size_light_on_plan(e, tmp);
-		if (tmp && tmp->obj == CYLINDER)
-			ombre += size_light_on_cyl(e, tmp);
-		if (tmp && tmp->obj == CONE)
-			ombre += size_light_on_cone(e, tmp);
-		if (tmp && tmp->obj == DSPHERE)
-			ombre += size_light_on_demi_sphere(e, tmp);
-		tmp = tmp->next;
-	}
-	return (ombre);
+	size_light(e, tmp, &shadow);
+	return (shadow);
 }

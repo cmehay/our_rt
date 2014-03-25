@@ -21,6 +21,10 @@ SRC =	main.c \
 		set_mlx.c \
 		raytracer.c \
 		light.c \
+		light_cone.c \
+		light_cylinder.c \
+		light_plan.c \
+		light_sphere.c \
 		draw_sphere.c \
 		draw_demi_sphere.c \
 		draw_plan.c \

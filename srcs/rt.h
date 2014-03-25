@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/24 17:04:22 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/25 15:20:20 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define OBJ_CONE "cone"
 # define OBJ_PLAN "plan"
 # define OBJ_DSPHERE "dsphere"
+# define OBJ_DCYLINDER "dcylinder"
 # define OBJ_ALIASING "anti-aliasing"
 # define OBJ_HEIGHT "height"
 # define OBJ_WIDTH "width"
@@ -42,6 +43,7 @@ typedef enum	e_obj
 	CONE,
 	PLAN,
 	DSPHERE,
+	DCYLINDER,
 	LIGHT,
 	ANTIALIASING,
 	HEIGHT,
@@ -113,6 +115,8 @@ typedef struct	s_data
 	t_obj			obj;
 	t_pos			pos;
 	t_pos			angle;
+	int				min;
+	int				max;
 	float			radius;
 	t_pos			vect;
 	int				rgb[3];
