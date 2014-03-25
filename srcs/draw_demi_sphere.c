@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:25 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 15:00:57 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/25 15:35:31 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		rt_demi_sphere(t_env *e, t_data *scene)
 
 int		get_demi_to_print(t_env *e, t_data *scene, t_pos v)
 {
+	float	min_i;
 	float	inter1;
 	float	inter2;
 	float	change;
@@ -69,11 +70,11 @@ int		get_demi_to_print(t_env *e, t_data *scene, t_pos v)
 	inter.x = v.x;
 	inter1 = (-e->b + sqrt(e->ray.delta)) / (2 * e->a);
 	inter2 = (-e->b - sqrt(e->ray.delta)) / (2 * e->a);
-	inter2 = (fmin(inter1, inter2) > 0.01) ? fmin(inter1, inter2)
+	min_i = (fmin(inter1, inter2) > 0.01) ? fmin(inter1, inter2)
 		: fmax(inter1, inter2);
-	inter.z = inter2 * e->vect.z - scene->pos.z + e->cam.z;
-	inter.y = inter2 * e->vect.y - scene->pos.y + e->cam.y;
-	inter.x = inter2 * e->vect.x - scene->pos.x + e->cam.x;
+	inter.z = min_i * e->vect.z - scene->pos.z + e->cam.z;
+	inter.y = min_i * e->vect.y - scene->pos.y + e->cam.y;
+	inter.x = min_i * e->vect.x - scene->pos.x + e->cam.x;
 	rt_rotate_x(&angle, &inter, &inu, e);
 	rt_rotate_y(&angle, &inter, &inu, e);
 	rt_rotate_z(&angle, &inter, &inu, e);
@@ -81,17 +82,16 @@ int		get_demi_to_print(t_env *e, t_data *scene, t_pos v)
 	mem = sinf(scene->angle.y * M_PI / 180) * inter.x + cosf(scene->angle.y * M_PI / 180) * mem;
 	mem = mem + scene->pos.z;
 	change = 0;
-	if (((e->ray.inter == -1) || e->ray.inter > inter2) && inter2 > 0.01)
+	if (((e->ray.inter == -1) || e->ray.inter > min_i) && min_i > 0.01)
 	{
 		if (mem > scene->pos.z)
 		{
-			mem = inter1;
-			inter1 = inter2;
-			inter2 = mem;
+			min_i = (fmin(inter1, inter2) > 0.01) ? fmax(inter1, inter2)
+				: fmin(inter1, inter2);
 			change = 1;
-			inter.z = inter2 * e->vect.z - scene->pos.z + e->cam.z;
-			inter.y = inter2 * e->vect.y - scene->pos.y + e->cam.y;
-			inter.x = inter2 * e->vect.x - scene->pos.x + e->cam.x;
+			inter.z = min_i * e->vect.z - scene->pos.z + e->cam.z;
+			inter.y = min_i * e->vect.y - scene->pos.y + e->cam.y;
+			inter.x = min_i * e->vect.x - scene->pos.x + e->cam.x;
 			rt_rotate_x(&angle, &inter, &inu, e);
 			rt_rotate_y(&angle, &inter, &inu, e);
 			rt_rotate_z(&angle, &inter, &inu, e);
