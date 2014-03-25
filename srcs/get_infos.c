@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:13:36 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 20:15:38 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/25 15:22:25 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	fill_list_with_obj(t_data **list, char **tab, t_obj type, int line)
 	t_data	*obj;
 	t_data	*tmp;
 
-	if (count_array(tab) != 11)
+	if (count_array(tab) != 11 || (type == DCYLINDER && count_array(tab) != 13))
 	{
 		display_parse_error(type, line);
 		return ;
@@ -77,6 +77,11 @@ t_data	*collect_info_about_obj(t_data *obj, char **tab, t_obj type)
 	obj->angle.x = ft_atoi(tab[8]);
 	obj->angle.y = ft_atoi(tab[9]);
 	obj->angle.z = ft_atoi(tab[10]);
+	if (type == DCYLINDER)
+	{
+		obj->min = ft_atoi(tab[11]);
+		obj->max = ft_atoi(tab[12]);
+	}
 	obj->next = NULL;
 	return (obj);
 }

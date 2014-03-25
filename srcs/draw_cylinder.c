@@ -6,11 +6,35 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/24 20:04:11 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/25 15:36:12 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void	set_pos_o_x(t_env *e, t_data *scene, t_pos *o, t_pos *x)
+{
+	o->x = e->cam.x - scene->pos.x;
+	o->z = e->cam.z - scene->pos.z;
+	o->y = e->cam.y - scene->pos.y;
+	x->x = scene->angle.x;
+	x->y = scene->angle.y;
+	x->z = scene->angle.z;
+}
+
+static void	set_pos_v(t_env *e, t_pos *v)
+{
+	v->x = e->vect.x;
+	v->z = e->vect.z;
+	v->y = e->vect.y;
+}
+
+static void set_pos_a(t_env *e, t_pos *a)
+{
+	a->x = e->angle[0];
+	a->y = -e->angle[1];
+	a->z = e->angle[2];
+}
 
 void	rt_cylinder(t_env *e, t_data *scene)
 {
@@ -19,18 +43,9 @@ void	rt_cylinder(t_env *e, t_data *scene)
 	t_pos	a;
 	t_pos	x;
 
-	a.x = e->angle[0];
-	a.y = -e->angle[1];
-	a.z = e->angle[2];
-	o.x = e->cam.x - scene->pos.x;
-	o.z = e->cam.z - scene->pos.z;
-	o.y = e->cam.y - scene->pos.y;
-	v.x = e->vect.x;
-	v.z = e->vect.z;
-	v.y = e->vect.y;
-	x.x = scene->angle.x;
-	x.y = scene->angle.y;
-	x.z = scene->angle.z;
+	set_pos_a(e, &a);
+	set_pos_o_x(e, scene, &o, &x);
+	set_pos_v(e, &v);
 	rt_rotate_x(&a, &v, &o, e);
 	rt_rotate_y(&a, &v, &o, e);
 	rt_rotate_z(&a, &v, &o, e);
@@ -74,74 +89,4 @@ int		get_cyl_to_print(t_env *e, t_data *scene)
 }
 
 
-void	lightcylinder(t_env *e)
-{
-	float	len;
-	t_pos	i;
-	t_pos	s;
-	float	scal;
-	t_pos	a;
 
-	a.x = e->angle[0];
-	a.y = -e->angle[1];
-	a.z = e->angle[2];
-	i.x = e->inter.x - e->heart_sphere[0];
-	i.y = e->inter.y - e->heart_sphere[1];
-	i.z = e->inter.z - e->heart_sphere[2];
-	s.x = e->shadowray.x;
-	s.y = e->shadowray.y;
-	s.z = e->shadowray.z;
-	rt_rotate_x(&a, &i, &s, e);
-	rt_rotate_y(&a, &i, &s, e);
-	rt_rotate_z(&a, &i, &s, e);
-	rt_rotate2(&i, &s, e);
-	i.z = 0;
-	len = sqrt(i.x * i.x + i.y * i.y + i.z * i.z);
-	e->normal.x = i.x / len;
-	e->normal.y = i.y / len;
-	e->normal.z = i.z / len;
-	scal = (e->normal.x * s.x + e->normal.y * s.y
-		 + e->normal.z * s.z) / (e->ray.len / 60);
-	if (scal > 0.2)
-		e->light_bis = fmax(pow(scal * (e->ray.len / 60), 60), e->light_bis);
-	scal = (scal > 1) ? 1 : scal;
-	scal = (scal < 0.05) ? 0.05 : scal;
-	e->light *= scal;
-}
-
-int		size_light_on_cyl(t_env *e, t_data *scene)
-{
-	t_pos	s;
-	t_pos	i;
-	t_pos	p;
-	t_pos	a;
-	t_pos	z;
-
-	a.x = e->angle[0];
-	a.y = -e->angle[1];
-	a.z = e->angle[2];
-	i.x = e->inter.x;
-	i.y = e->inter.y;
-	i.z = e->inter.z;
-	s.x = e->shadowray.x;
-	s.y = e->shadowray.y;
-	s.z = e->shadowray.z;
-	p.x = scene->pos.x;
-	p.y = scene->pos.y;
-	p.z = scene->pos.z;
-	rt_rotate_x(&a, &s, &i, e);
-	rt_rotate_x(&a, &z, &p, e);
-	rt_rotate_y(&a, &s, &i, e);
-	rt_rotate_y(&a, &z, &p, e);
-	rt_rotate_z(&a, &s, &i, e);
-	rt_rotate_z(&a, &z, &p, e);
-	rt_rotate(scene, &s, &i, e);
-	rt_rotate(scene, &z, &p, e);
-	e->a = pow((s.x), 2) + pow((s.y), 2);
-	e->b = 2 * ((s.x) * (i.x - p.x)
-		+ s.y * (i.y - p.y));
-	e->c = (pow((i.x - p.x), 2)
-		+ pow((i.y - p.y), 2) - pow(scene->radius, 2));
-	e->ray.delta_light = pow(e->b, 2) - 4 * e->a * e->c;
-	return (get_light_to_print(e));
-}

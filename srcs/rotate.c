@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 15:57:57 by dcouly            #+#    #+#             */
-/*   Updated: 2014/03/23 20:20:08 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/25 15:34:05 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ void	rt_rotate_y(t_pos *a, t_pos *v, t_pos *o, t_env *e)
 	{
 		mem = v->x;
 		v->x = cos(a->y * M_PI / 180) * mem + sin(a->y * M_PI / 180) * v->z;
-		v->z = sin(a->y * M_PI / 180) * mem * -1 + cos(a->y * M_PI / 180) * v->z;
+		v->z = sin(a->y * M_PI / 180) * mem * -1
+			+ cos(a->y * M_PI / 180) * v->z;
 		mem = o->x;
 		o->x = cos(a->y * M_PI / 180) * mem + sin(a->y * M_PI / 180) * o->z;
-		o->z = sin(a->y * M_PI / 180) * mem * -1 + cos(a->y * M_PI / 180) * o->z;
+		o->z = sin(a->y * M_PI / 180) * mem * -1
+			+ cos(a->y * M_PI / 180) * o->z;
 	}
 }
 
