@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 15:20:20 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/25 19:26:34 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define OBJ_PLAN "plan"
 # define OBJ_DSPHERE "dsphere"
 # define OBJ_DCYLINDER "dcylinder"
+# define OBJ_DCONE "dcone"
 # define OBJ_ALIASING "anti-aliasing"
 # define OBJ_HEIGHT "height"
 # define OBJ_WIDTH "width"
@@ -44,6 +45,7 @@ typedef enum	e_obj
 	PLAN,
 	DSPHERE,
 	DCYLINDER,
+	DCONE,
 	LIGHT,
 	ANTIALIASING,
 	HEIGHT,
@@ -189,10 +191,21 @@ int		get_cone_to_print(t_env *e, t_data *scene);
 void	lightcone(t_env *e);
 int		size_light_on_cone(t_env *e, t_data *scene);
 
+void	rt_dcone(t_env *e, t_data *scene);
+int		get_dcone_to_print(t_env *e, t_data *scene);
+void	lightdcone(t_env *e);
+int		size_light_on_dcone(t_env *e, t_data *scene);
+
 void	rt_cylinder(t_env *e, t_data *scene);
 int		get_cyl_to_print(t_env *e, t_data *scene);
 void	lightcylinder(t_env *e);
 int		size_light_on_cyl(t_env *e, t_data *scene);
+
+void	rt_dcylinder(t_env *e, t_data *scene);
+int		get_dcyl_to_print(t_env *e, t_data *scene);
+void	lightdcylinder(t_env *e);
+int		size_light_on_dcyl(t_env *e, t_data *scene);
+int		get_light_to_demi_c(t_env *e, t_data *scene);
 
 void	*safe_malloc(size_t size);
 int		count_array(char **array);

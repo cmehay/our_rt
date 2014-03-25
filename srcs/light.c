@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 15:27:42 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/25 19:27:39 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,12 @@ static void	size_light(t_env *e, t_data *tmp, int *shadow)
 			shadow += size_light_on_plan(e, tmp);
 		if (tmp && tmp->obj == CYLINDER)
 			shadow += size_light_on_cyl(e, tmp);
+		if (tmp && tmp->obj == DCYLINDER)
+			shadow += size_light_on_dcyl(e, tmp);
 		if (tmp && tmp->obj == CONE)
 			shadow += size_light_on_cone(e, tmp);
+		if (tmp && tmp->obj == DCONE)
+			shadow += size_light_on_dcone(e, tmp);
 		if (tmp && tmp->obj == DSPHERE)
 			shadow += size_light_on_demi_sphere(e, tmp);
 		tmp = tmp->next;
@@ -117,6 +121,10 @@ int		id_object_for_light(t_env *e, t_data **scene)
 		lightcone(e);
 	if (e->object == 5)
 		lightdemisphere(e);
+	if (e->object == 6)
+		lightdcylinder(e);
+	if (e->object == 7)
+		lightdcone(e);
 	size_light(e, tmp, &shadow);
 	return (shadow);
 }
