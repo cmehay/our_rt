@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/24 19:09:21 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/26 21:22:35 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 23:25:25 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int			get_light_to_print(t_env *e, t_data light)
 		inter = (-e->b - sqrt(e->ray.delta_light)) / (2 * e->a);
 		min = fmin(inter2, inter);
 		max = fmax(inter2, inter);
-		if (min > 0.1 && (max < e->lenght))
+		if (min > 0.01 && (max < e->lenght))
 			return (set_light_color(e, min, light));
 	}
 	return (0);

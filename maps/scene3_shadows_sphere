@@ -1,0 +1,15 @@
+{ cam: x(far/near) y(right/left) z(up/down) ; vectx vecty vectz ; angle_x angle_y angle_z }
+cam       -110 0 0       0 0 0       		0 0 0
+
+width 1600
+height 800
+anti-aliasing 0
+
+{ obj: x(sback/front) y(right/left) z(up/down) radius(small/big) ; color ; angle_x angle_y angle_z }
+sphere  -20 0 0 7       220 220 60 			0 0 0
+plan    0 0 1 20        250 50 50  			0 0 0
+
+{ light: -x(back) x=0 middle +x(front) y(right/left) z(up/down) }
+light -90 50 40 60 0 0 0 0 0 0
+light -40 0 15 60 0 0 0 0 0 0
+light -50 10 20 60 0 0 0 0 0 0
