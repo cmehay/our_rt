@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:13:36 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 19:07:57 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 19:56:58 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ t_data	*collect_info_about_obj(t_data *obj, char **tab, t_obj type)
 	obj->pos.y = ft_atoi(tab[2]);
 	obj->pos.z = ft_atoi(tab[3]);
 	obj->radius = ft_atoi(tab[4]);
+	if (obj->radius <= 0)
+		obj->radius = 1;
 	obj->rgb[0] = ft_atoi(tab[5]);
 	obj->rgb[1] = ft_atoi(tab[6]);
 	obj->rgb[2] = ft_atoi(tab[7]);

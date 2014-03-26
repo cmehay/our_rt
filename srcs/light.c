@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 19:27:39 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 20:00:24 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		check_light(t_env *e, t_data **scene)
 		if (tmp && tmp->obj == LIGHT)
 		{
 			size_raylight(e, tmp);
-			if (id_object_for_light(e, scene) == 0)
+			if (id_object_for_light(e, scene, tmp) == 0)
 				mem = e->light_bis;
 			two_light++;
 		}
@@ -81,50 +81,52 @@ void	size_raylight(t_env *e, t_data *scene)
 	e->shadowray.z = z / len;
 }
 
-static void	size_light(t_env *e, t_data *tmp, int *shadow)
+#include <stdio.h>
+
+static void	size_light(t_env *e, t_data *tmp, int *shadow, t_data *light)
 {
-	while (tmp)
+	*shadow = 0;
+	while (tmp && *shadow == 0)
 	{
 		if (tmp && tmp->obj == SPHERE)
-			shadow += size_light_on_sphere(e, tmp);
+			shadow += size_light_on_sphere(e, tmp, *light);
 		if (tmp && tmp->obj == PLAN)
-			shadow += size_light_on_plan(e, tmp);
+			shadow += size_light_on_plan(e, tmp, *light);
 		if (tmp && tmp->obj == CYLINDER)
-			shadow += size_light_on_cyl(e, tmp);
+			shadow += size_light_on_cyl(e, tmp, *light);
 		if (tmp && tmp->obj == DCYLINDER)
-			shadow += size_light_on_dcyl(e, tmp);
+			shadow += size_light_on_dcyl(e, tmp, *light);
 		if (tmp && tmp->obj == CONE)
-			shadow += size_light_on_cone(e, tmp);
+			shadow += size_light_on_cone(e, tmp, *light);
 		if (tmp && tmp->obj == DCONE)
-			shadow += size_light_on_dcone(e, tmp);
+			shadow += size_light_on_dcone(e, tmp, *light);
 		if (tmp && tmp->obj == DSPHERE)
-			shadow += size_light_on_demi_sphere(e, tmp);
+			shadow += size_light_on_demi_sphere(e, tmp, *light);
 		tmp = tmp->next;
 	}
 }
 
-int		id_object_for_light(t_env *e, t_data **scene)
+int		id_object_for_light(t_env *e, t_data **scene, t_data *light)
 {
 	t_data	*tmp;
 	int		shadow;
 
-	shadow = 0;
 	tmp = *scene;
 	e->ray.inter_light = -1;
 	if (e->object == 1)
-		lightsphere(e);
+		lightsphere(e, *light);
 	if (e->object == 2)
-		lightplan(e);
+		lightplan(e, *light);
 	if (e->object == 3)
-		lightcylinder(e);
+		lightcylinder(e, * light);
 	if (e->object == 4)
-		lightcone(e);
+		lightcone(e, *light);
 	if (e->object == 5)
-		lightdemisphere(e);
+		lightdemisphere(e, *light);
 	if (e->object == 6)
-		lightdcylinder(e);
+		lightdcylinder(e, *light);
 	if (e->object == 7)
-		lightdcone(e);
-	size_light(e, tmp, &shadow);
+		lightdcone(e, *light);
+	size_light(e, tmp, &shadow, light);
 	return (shadow);
 }

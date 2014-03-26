@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:13 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 19:09:27 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 16:40:40 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		raytracer(t_env *e, t_data **scene)
 		{
 			display_progress(e->screen.render.h, e->screen.render.w);
 			size_ray(e);
+			e->object = 0;
+			e->ray.inter = -1;
 			id_object(e, *scene);
 			if (e->ray.inter > 0)
 				check_light(e, scene);
@@ -57,11 +59,9 @@ int		size_ray(t_env *e)
 
 int		id_object(t_env *e, t_data *scene)
 {
-	e->ray.inter = -1;
 	e->color.red = 0;
 	e->color.green = 0;
 	e->color.blue = 0;
-	e->object = 0;
 	e->angle_ob.x = 0;
 	e->angle_ob.y = 0;
 	e->angle_ob.z = 0;

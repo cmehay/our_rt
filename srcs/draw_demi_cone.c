@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_cone.c                                        :+:      :+:    :+:   */
+/*   draw_demi_cone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:31 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 20:22:15 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 19:48:01 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,73 +61,3 @@ void		rt_dcone(t_env *e, t_data *scene)
 	if (e->ray.delta > 0)
 		get_dcone_to_print(e, scene);
 }
-
-#include <stdio.h>
-
-int			get_dcone_to_print(t_env *e, t_data *scene)
-{
-	float	min_i;
-	float	max_i;
-	float	inter1;
-	float	inter2;
-	float	inter_z;
-	float	change;
-	t_pos	angle;
-	t_pos	inter;
-	t_pos	inu;
-
-	angle.x = e->angle[0];
-	angle.y = -e->angle[1];
-	angle.z = e->angle[2];
-	change = 0;
-	inter1 = (-e->b + sqrt(e->ray.delta)) / (2 * e->a);
-	inter2 = (-e->b - sqrt(e->ray.delta)) / (2 * e->a);
-	min_i = fmin(inter1, inter2);
-	max_i = fmax(inter1, inter2);
-	inter.z = min_i * e->vect.z - scene->pos.z + e->cam.z;
-	inter.y = min_i * e->vect.y - scene->pos.y + e->cam.y;
-	inter.x = min_i * e->vect.x - scene->pos.x + e->cam.x;
-	rt_rotate_x(&angle, &inter, &inu, e);
-	rt_rotate_y(&angle, &inter, &inu, e);
-	rt_rotate_z(&angle, &inter, &inu, e);
-	inter_z = -sinf(-scene->angle.x * M_PI / 180) * inter.y + cosf(-scene->angle.x * M_PI / 180) * inter.z;
-	inter_z = sinf(-scene->angle.y * M_PI / 180) * inter.x + cosf(-scene->angle.y * M_PI / 180) * inter_z;
-	inter_z = inter_z + scene->pos.z;
-//	printf("%f %f %f\n", inter_z, inter.z, scene->pos.z);
-	if (inter_z < scene->pos.z + scene->min || inter_z > scene->pos.z + scene->max)
-	{
-		change = min_i;
-		min_i = max_i;
-		max_i = change;
-		change = 1;
-		inter.z = min_i * e->vect.z - scene->pos.z + e->cam.z;
-		inter.y = min_i * e->vect.y - scene->pos.y + e->cam.y;
-		inter.x = min_i * e->vect.x - scene->pos.x + e->cam.x;
-		rt_rotate_x(&angle, &inter, &inu, e);
-		rt_rotate_y(&angle, &inter, &inu, e);
-		rt_rotate_z(&angle, &inter, &inu, e);
-		inter_z = -sinf(-scene->angle.x * M_PI / 180) * inter.y + cosf(-scene->angle.x * M_PI / 180) * inter.z;
-		inter_z = sinf(-scene->angle.y * M_PI / 180) * inter.x + cosf(-scene->angle.y * M_PI / 180) * inter_z;
-		inter_z = inter_z + scene->pos.z;
-		if (inter_z < scene->pos.z + scene->min || inter_z > scene->pos.z + scene->max)
-			return (0);
-	}
-	if (((e->ray.inter == -1) || e->ray.inter > inter2) && inter2 > 0.01)
-	{
-		e->angle_ob.x = scene->angle.x;
-		e->angle_ob.y = scene->angle.y;
-		e->angle_ob.z = scene->angle.z;
-		e->heart_sphere[0] = scene->pos.x;
-		e->heart_sphere[1] = scene->pos.y;
-		e->heart_sphere[2] = scene->pos.z;
-		e->heart_plan[3] = pow(tanf(scene->radius * M_PI / 180), 2);
-		e->ray.inter = min_i;
-		e->object = 7;
-		e->heart_plan[2] = (inter_z < scene->pos.z) ? -change : change;
-		e->color.red = scene->rgb[0];
-		e->color.green = scene->rgb[1];
-		e->color.blue = scene->rgb[2];
-	}
-	return (0);
-}
-

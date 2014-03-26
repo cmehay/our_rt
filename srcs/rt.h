@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:10:09 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 19:26:34 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 19:32:51 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,43 +169,44 @@ int		id_object(t_env *e, t_data *scene);
 
 int		check_light(t_env *e, t_data **scene);
 void	size_raylight(t_env *e, t_data *scene);
-int		id_object_for_light(t_env *e, t_data **scene);
+int		id_object_for_light(t_env *e, t_data **scene, t_data *light);
 
 int		rt_demi_sphere(t_env *e, t_data *scene);
-int		get_demi_to_print(t_env *e, t_data *scene, t_pos v);
-int		size_light_on_demi_sphere(t_env *e, t_data *scene);
-void	lightdemisphere(t_env *e);
+int		get_demi_to_print(t_env *e, t_data *scene);
+int		size_light_on_demi_sphere(t_env *e, t_data *scene, t_data light);
+void	lightdemisphere(t_env *e, t_data light);
+int		get_light_to_print_demi(t_env *e, t_data *scene, t_data light);
 
 int		rt_sphere(t_env *e, t_data *scene);
 int		get_inter_to_print(t_env *e, t_data *scene);
-int		size_light_on_sphere(t_env *e, t_data *scene);
-int		get_light_to_print(t_env *e);
-void	lightsphere(t_env *e);
+int		size_light_on_sphere(t_env *e, t_data *scene, t_data light);
+int		get_light_to_print(t_env *e, t_data light);
+void	lightsphere(t_env *e, t_data light);
 
 int		rt_plan(t_env *e, t_data *scene);
-int		lightplan(t_env *e);
-int		size_light_on_plan(t_env *e, t_data *scene);
+int		lightplan(t_env *e, t_data light);
+int		size_light_on_plan(t_env *e, t_data *scene, t_data light);
 
 void	rt_cone(t_env *e, t_data *scene);
 int		get_cone_to_print(t_env *e, t_data *scene);
-void	lightcone(t_env *e);
-int		size_light_on_cone(t_env *e, t_data *scene);
+void	lightcone(t_env *e, t_data light);
+int		size_light_on_cone(t_env *e, t_data *scene, t_data light);
 
 void	rt_dcone(t_env *e, t_data *scene);
 int		get_dcone_to_print(t_env *e, t_data *scene);
-void	lightdcone(t_env *e);
-int		size_light_on_dcone(t_env *e, t_data *scene);
+void	lightdcone(t_env *e, t_data light);
+int		size_light_on_dcone(t_env *e, t_data *scene, t_data light);
 
 void	rt_cylinder(t_env *e, t_data *scene);
 int		get_cyl_to_print(t_env *e, t_data *scene);
-void	lightcylinder(t_env *e);
-int		size_light_on_cyl(t_env *e, t_data *scene);
+void	lightcylinder(t_env *e, t_data light);
+int		size_light_on_cyl(t_env *e, t_data *scene, t_data light);
 
 void	rt_dcylinder(t_env *e, t_data *scene);
 int		get_dcyl_to_print(t_env *e, t_data *scene);
-void	lightdcylinder(t_env *e);
-int		size_light_on_dcyl(t_env *e, t_data *scene);
-int		get_light_to_demi_c(t_env *e, t_data *scene);
+void	lightdcylinder(t_env *e, t_data light);
+int		size_light_on_dcyl(t_env *e, t_data *scene, t_data light);
+int		get_light_to_demi_c(t_env *e, t_data *scene, t_data light);
 
 void	*safe_malloc(size_t size);
 int		count_array(char **array);

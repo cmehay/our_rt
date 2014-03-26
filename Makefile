@@ -6,7 +6,7 @@
 #    By: sde-segu <sde-segu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/02/24 01:47:17 by sde-segu          #+#    #+#              #
-#    Updated: 2014/03/25 19:26:55 by dcouly           ###   ########.fr        #
+#    Updated: 2014/03/26 19:47:38 by dcouly           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,8 +24,10 @@ SRC =	main.c \
 		light_cone.c \
 		light_demi_cone.c \
 		light_cylinder.c \
+		light_demi_cylinder.c \
 		light_plan.c \
 		light_sphere.c \
+		light_dsphere.c \
 		draw_sphere.c \
 		draw_demi_sphere.c \
 		draw_plan.c \
@@ -33,6 +35,9 @@ SRC =	main.c \
 		draw_demi_cone.c \
 		draw_cylinder.c \
 		draw_demi_cylinder.c \
+		get_dcylindre.c \
+		get_dsphere.c \
+		get_dcone.c \
 		utils.c \
 		map_parser.c \
 		errors.c \

@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/24 17:00:41 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/24 18:39:14 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 16:11:48 by dcouly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	set_pos_a_i_s(t_env *e, t_pos *a, t_pos *i, t_pos *s)
 	s->z = e->shadowray.z;
 }
 
-void	lightcylinder(t_env *e)
+void	lightcylinder(t_env *e, t_data light)
 {
 	float	len;
 	t_pos	i;
@@ -44,9 +44,10 @@ void	lightcylinder(t_env *e)
 	e->normal.y = i.y / len;
 	e->normal.z = i.z / len;
 	scal = (e->normal.x * s.x + e->normal.y * s.y
-		 + e->normal.z * s.z) / (e->ray.len / 60);
-	if (scal > 0.2)
-		e->light_bis = fmax(pow(scal * (e->ray.len / 60), 60), e->light_bis);
+		 + e->normal.z * s.z) / (e->ray.len / light.radius);
+	if (scal > 0.2 && light.radius)
+		e->light_bis = fmax(pow(scal * (e->ray.len / light.radius), 60),
+				e->light_bis);
 	scal = (scal > 1) ? 1 : scal;
 	scal = (scal < 0.05) ? 0.05 : scal;
 	e->light *= scal;
@@ -72,7 +73,7 @@ static void	set_pos_p(t_data *scene, t_pos *p)
 	p->z = scene->pos.z;
 }
 
-int		size_light_on_cyl(t_env *e, t_data *scene)
+int		size_light_on_cyl(t_env *e, t_data *scene, t_data light)
 {
 	t_pos	s;
 	t_pos	i;
@@ -96,5 +97,5 @@ int		size_light_on_cyl(t_env *e, t_data *scene)
 	e->c = (pow((i.x - p.x), 2)
 		+ pow((i.y - p.y), 2) - pow(scene->radius, 2));
 	e->ray.delta_light = pow(e->b, 2) - 4 * e->a * e->c;
-	return (get_light_to_print(e));
+	return (get_light_to_print(e, light));
 }
