@@ -1,0 +1,22 @@
+{ cam: x(far/near) y(right/left) z(up/down) ; vectx vecty vectz ; angle_x angle_y angle_z }
+cam				-150 0 0		0 0 0			0 -15 -15
+
+width			1300
+height			1000
+anti-aliasing	2
+
+{ obj: x(sback/front) y(right/left) z(up/down) radius(small/big) ; red green blue ; angle_x angle_y angle_z }
+{pokeball}
+dsphere			0 0 3 30			255 200 0			180 0 0
+dsphere			0 0 0 30			255 255 255			0 0 0
+dcylinder		0 0 0 30			0 190 255				0 0 0		0 3
+
+{button}
+dsphere			-24 0 1 9			0 190 255			0 90 0
+dsphere			-30 0 1 6			255 200 0			0 90 0
+
+plan			0 0 1 40			60 60 60			0 0 0
+plan			1 0 0 -70			60 60 60			0 0 0
+
+{ light: -x(back) x=0 middle +x(front) y(right/left) z(up/down) radius(small/big) light  180 -200 -98 0     0 0 0      0 0 0}
+light			-150 -20 20			60 10 0			0 0 0 0

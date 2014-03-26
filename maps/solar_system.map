@@ -1,0 +1,50 @@
+{ cam: x(far/near) y(right/left) z(up/down) ; vectx vecty vectz ; angle_x angle_y angle_z }
+
+cam				-150 0 0			0 0 0				0 0 0
+
+width			1300
+height			1000
+anti-aliasing	2
+
+{ obj: x(sback/front) y(right/left) z(up/down) radius(small/big) ; red green blue ; angle_x angle_y angle_z }
+
+{sun}
+sphere			150 -150 0 120		255 130 0			0 0 0
+
+{mercury}
+sphere			-100 -20 0 1		255 255 255			0 0 0
+
+{venus}
+sphere			-97 -17 0 2			255 220 0			0 0 0
+
+{earth}
+sphere			-88 -13 0 3			0 180 255			0 0 0
+
+{mars}
+sphere			-78 -6 0 4			255 130 0			0 0 0
+
+{jupiter}
+sphere			-68 6 0 7			255 170 0			0 0 0
+
+{saturn}
+sphere			-56 21 0 4			255 220 0			0 0 0
+dcylinder		-56 21 0 5			255 220 0			-30 30 0		0 1
+
+{uranus}
+sphere			-50 32 0 3			150 250 250			0 0 0
+
+{neptune}
+sphere			-38 45 0 3			64 180 255			0 0 0
+
+{pluto}
+sphere			-30 55 0 1			255 255 255			0 0 0
+
+dplan			0 0 1 20			230 230 230			0 0 0
+
+{ light: -x(back) x=0 middle +x(front) y(right/left) z(up/down) radius(small/big) light  180 -200 -98 0     0 0 0      0 0 0}
+
+{sun light}
+light			-30 -150 0			100 0 0				0 0 0 0
+
+{light}
+light			-150 -10 0			100 0 0				0 0 0 0
