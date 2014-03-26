@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 11:57:02 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/18 19:04:34 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:11:57 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 static int	get_average(t_env *e, int x, int y)
 {
-	int	x_c;
-	int	y_c;
+	int		x_c;
+	int		y_c;
 	t_rgb	color;
 	t_rgb	tmp;
 
 	ft_bzero(&color, sizeof(t_rgb));
 	x_c = 1 << e->screen.upscale;
-
 	while (x_c--)
 	{
 		y_c = 1 << e->screen.upscale;

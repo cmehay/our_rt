@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   libft_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/22 13:09:31 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/26 21:41:36 by cmehay           ###   ########.fr       */
+/*   Created: 2014/03/26 21:49:24 by cmehay            #+#    #+#             */
+/*   Updated: 2014/03/26 21:53:04 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFT_STRUCTS_H
+# define LIBFT_STRUCTS_H
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+# include <unistd.h>
+
+typedef enum	e_bool
 {
-	unsigned char	*s1_cp;
-	unsigned char	*s2_cp;
-	size_t			i;
+	FALSE,
+	TRUE
+}				t_bool;
 
-	s1_cp = (unsigned char*)s1;
-	s2_cp = (unsigned char*)s2;
-	i = 0;
-	while ((s1_cp[i] - s2_cp[i]) == 0 && i < n - 1)
-		i++;
-	return ((s1_cp[i] - s2_cp[i]) * (n > 0));
-}
+typedef struct	s_strlen
+{
+	size_t	s1;
+	size_t	s2;
+}				t_strlen;
+
+typedef struct	s_alloc_lst
+{
+	ssize_t				ptr;
+	struct s_alloc_lst	*next;
+}				t_alloc_lst;
+
+typedef struct	s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}				t_list;
+
+#endif

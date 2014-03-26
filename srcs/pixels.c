@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/17 16:56:53 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/18 18:45:53 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:35:51 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,3 @@ int		rgb_to_pixel(t_rgb color)
 	pixel += color.blue;
 	return (pixel);
 }
-
-

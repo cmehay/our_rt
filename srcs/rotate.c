@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/16 15:57:57 by dcouly            #+#    #+#             */
-/*   Updated: 2014/03/25 15:34:05 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:30:54 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	rt_rotate_x(t_pos *a, t_pos *v, t_pos *o, t_env *e)
 {
 	float	mem;
 
-	(void) e;
+	(void)e;
 	if (a->x)
 	{
 		mem = v->y;
@@ -31,8 +31,8 @@ void	rt_rotate_x(t_pos *a, t_pos *v, t_pos *o, t_env *e)
 void	rt_rotate_z(t_pos *a, t_pos *v, t_pos *o, t_env *e)
 {
 	float	mem;
-	(void) e;
 
+	(void)e;
 	if (a->z)
 	{
 		mem = v->x;
@@ -48,7 +48,7 @@ void	rt_rotate_y(t_pos *a, t_pos *v, t_pos *o, t_env *e)
 {
 	float	mem;
 
-	(void) e;
+	(void)e;
 	if (a->y)
 	{
 		mem = v->x;
@@ -64,7 +64,7 @@ void	rt_rotate_y(t_pos *a, t_pos *v, t_pos *o, t_env *e)
 
 void	rt_rotate2(t_pos *v, t_pos *o, t_env *e)
 {
-	t_pos	 a;
+	t_pos	a;
 
 	a.x = e->angle_ob.x;
 	a.y = e->angle_ob.y;
@@ -76,7 +76,7 @@ void	rt_rotate2(t_pos *v, t_pos *o, t_env *e)
 
 void	rt_rotate(t_data *scene, t_pos *v, t_pos *o, t_env *e)
 {
-	t_pos	 a;
+	t_pos	a;
 
 	a.x = scene->angle.x;
 	a.y = scene->angle.y;

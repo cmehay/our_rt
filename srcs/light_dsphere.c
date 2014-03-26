@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_dsphere.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcouly <dcouly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/26 19:18:19 by dcouly            #+#    #+#             */
-/*   Updated: 2014/03/26 19:33:33 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:22:19 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int		rt_change_col(t_env *e, float min, t_data light)
 	return (1);
 }
 
-int	get_light_to_print_demi(t_env *e, t_data *scene, t_data light)
+int				get_light_to_print_demi(t_env *e, t_data *scene, t_data light)
 {
 	float	inter1;
 	float	inter2;
@@ -77,7 +77,7 @@ int	get_light_to_print_demi(t_env *e, t_data *scene, t_data light)
 	return (0);
 }
 
-static void	rt_init_light(t_env *e, t_pos *nor, t_pos *a)
+static void		rt_init_light(t_env *e, t_pos *nor, t_pos *a)
 {
 	t_pos	u;
 
@@ -106,7 +106,7 @@ static void	rt_init_light(t_env *e, t_pos *nor, t_pos *a)
 	}
 }
 
-void	lightdemisphere(t_env *e, t_data light)
+void			lightdemisphere(t_env *e, t_data light)
 {
 	float	len;
 	t_pos	nor;

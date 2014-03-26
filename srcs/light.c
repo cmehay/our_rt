@@ -6,16 +6,17 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/27 21:15:52 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/26 20:00:24 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 22:08:46 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <stdio.h>
 
 static void	glow(t_env *e, float mem, int two_light)
 {
-	while (--two_light)
+	if (!two_light)
+		e->light = 0;
+	while (--two_light > 0)
 		e->light = sqrt(e->light);
 	e->color.red *= e->light;
 	e->color.green *= e->light;
@@ -35,7 +36,7 @@ static void	glow(t_env *e, float mem, int two_light)
 		e->color.green = 255;
 }
 
-int		check_light(t_env *e, t_data **scene)
+int			check_light(t_env *e, t_data **scene)
 {
 	t_data	*tmp;
 	int		two_light;
@@ -64,7 +65,7 @@ int		check_light(t_env *e, t_data **scene)
 	return (0);
 }
 
-void	size_raylight(t_env *e, t_data *scene)
+void		size_raylight(t_env *e, t_data *scene)
 {
 	float	len;
 	float	x;
@@ -80,8 +81,6 @@ void	size_raylight(t_env *e, t_data *scene)
 	e->shadowray.y = y / len;
 	e->shadowray.z = z / len;
 }
-
-#include <stdio.h>
 
 static void	size_light(t_env *e, t_data *tmp, int *shadow, t_data *light)
 {
@@ -106,7 +105,7 @@ static void	size_light(t_env *e, t_data *tmp, int *shadow, t_data *light)
 	}
 }
 
-int		id_object_for_light(t_env *e, t_data **scene, t_data *light)
+int			id_object_for_light(t_env *e, t_data **scene, t_data *light)
 {
 	t_data	*tmp;
 	int		shadow;
@@ -118,7 +117,7 @@ int		id_object_for_light(t_env *e, t_data **scene, t_data *light)
 	if (e->object == 2)
 		lightplan(e, *light);
 	if (e->object == 3)
-		lightcylinder(e, * light);
+		lightcylinder(e, *light);
 	if (e->object == 4)
 		lightcone(e, *light);
 	if (e->object == 5)

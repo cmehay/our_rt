@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/02 03:09:23 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 15:36:12 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:19:16 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void set_pos_a(t_env *e, t_pos *a)
 	a->z = e->angle[2];
 }
 
-void	rt_cylinder(t_env *e, t_data *scene)
+void		rt_cylinder(t_env *e, t_data *scene)
 {
 	t_pos	v;
 	t_pos	o;
@@ -62,7 +62,7 @@ void	rt_cylinder(t_env *e, t_data *scene)
 	get_cyl_to_print(e, scene);
 }
 
-int		get_cyl_to_print(t_env *e, t_data *scene)
+int			get_cyl_to_print(t_env *e, t_data *scene)
 {
 	float	inter1;
 	float	inter2;
@@ -87,6 +87,3 @@ int		get_cyl_to_print(t_env *e, t_data *scene)
 	}
 	return (0);
 }
-
-
-

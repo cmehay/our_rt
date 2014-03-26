@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_demi_cylinder.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcouly <dcouly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/26 17:21:10 by dcouly            #+#    #+#             */
-/*   Updated: 2014/03/26 19:30:52 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:29:00 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int		rt_change_col(t_env *e, float min, t_data light)
 	return (1);
 }
 
-int      get_light_to_demi_c(t_env *e, t_data *scene, t_data light)
+int				get_light_to_demi_c(t_env *e, t_data *scene, t_data light)
 {
 	float	inter1;
 	float	inter2;
@@ -65,7 +65,7 @@ int      get_light_to_demi_c(t_env *e, t_data *scene, t_data light)
 		inter1 = (-e->b - sqrt(e->ray.delta_light)) / (2 * e->a);
 		min = fmin(inter2, inter1);
 		mem = rt_init(min, e, scene);
-	if (mem > scene->pos.z + scene->max || mem < scene->pos.z + scene->min)
+		if (mem > scene->pos.z + scene->max || mem < scene->pos.z + scene->min)
 		{
 			min = fmax(inter2, inter1);
 			mem = rt_init(min, e, scene);

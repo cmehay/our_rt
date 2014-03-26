@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:25 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/26 19:30:49 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:13:24 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	rt_init2(t_pos *v, t_pos *x, t_env *e, t_data *scene)
 	x->z = scene->angle.z;
 }
 
-int		rt_demi_sphere(t_env *e, t_data *scene)
+int			rt_demi_sphere(t_env *e, t_data *scene)
 {
 	t_pos	v;
 	t_pos	o;
@@ -61,7 +61,7 @@ int		rt_demi_sphere(t_env *e, t_data *scene)
 	return (0);
 }
 
-int		size_light_on_demi_sphere(t_env *e, t_data *scene, t_data light)
+int			size_light_on_demi_sphere(t_env *e, t_data *scene, t_data light)
 {
 	e->a = pow((e->shadowray.x), 2) + pow((e->shadowray.y), 2)
 		+ pow((e->shadowray.z), 2);

@@ -6,32 +6,32 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/15 14:37:00 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/25 19:03:30 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 22:04:47 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
+static char	*g_objs[] =
+{
+	OBJ_CAM,
+	OBJ_SPHERE,
+	OBJ_CYLINDER,
+	OBJ_CONE,
+	OBJ_PLAN,
+	OBJ_DSPHERE,
+	OBJ_DCYLINDER,
+	OBJ_DCONE,
+	OBJ_LIGHT,
+	OBJ_ALIASING,
+	OBJ_HEIGHT,
+	OBJ_WIDTH,
+	NULL
+};
+
 char	**gimme_obj_list(void)
 {
-	static char	*objs[] =
-	{
-		OBJ_CAM,
-		OBJ_SPHERE,
-		OBJ_CYLINDER,
-		OBJ_CONE,
-		OBJ_PLAN,
-		OBJ_DSPHERE,
-		OBJ_DCYLINDER,
-		OBJ_DCONE,
-		OBJ_LIGHT,
-		OBJ_ALIASING,
-		OBJ_HEIGHT,
-		OBJ_WIDTH,
-		NULL
-	};
-
-	return (objs);
+	return (g_objs);
 }
 
 t_obj	parse_object(char *input)

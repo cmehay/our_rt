@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_dsphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcouly <dcouly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/26 19:02:46 by dcouly            #+#    #+#             */
-/*   Updated: 2014/03/26 19:15:16 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:14:46 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ static void		rt_assign(t_env *e, t_data *scene, float min_i, float change)
 	e->color.blue = scene->rgb[2];
 }
 
-int   get_demi_to_print(t_env *e, t_data *scene)
+int				get_demi_to_print(t_env *e, t_data *scene)
 {
-	float  min_i;
-	float  inter1;
-	float  inter2;
-	float  change;
-	float  mem;
+	float	min_i;
+	float	inter1;
+	float	inter2;
+	float	change;
+	float	mem;
 
 	inter1 = (-e->b + sqrt(e->ray.delta)) / (2 * e->a);
 	inter2 = (-e->b - sqrt(e->ray.delta)) / (2 * e->a);

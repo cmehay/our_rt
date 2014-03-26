@@ -6,13 +6,13 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:13:36 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/26 19:56:58 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:15:12 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_data		*get_infos(t_env *e, int fd)
+t_data	*get_infos(t_env *e, int fd)
 {
 	char	*line;
 	char	**split;

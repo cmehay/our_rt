@@ -6,12 +6,11 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/01 02:13:06 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/25 15:13:03 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:13:51 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <stdio.h>
 
 static void	rt_plan_compute(t_env *e, t_data *scene, float inter)
 {
@@ -35,7 +34,7 @@ static void	rt_plan_compute(t_env *e, t_data *scene, float inter)
 	e->heart_plan[3] = scene->radius;
 }
 
-int		rt_plan(t_env *e, t_data *scene)
+int			rt_plan(t_env *e, t_data *scene)
 {
 	float	inter;
 	t_pos	o;
@@ -58,6 +57,3 @@ int		rt_plan(t_env *e, t_data *scene)
 		rt_plan_compute(e, scene, inter);
 	return (0);
 }
-
-
-

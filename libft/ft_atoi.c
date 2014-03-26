@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 07:17:18 by cmehay            #+#    #+#             */
-/*   Updated: 2013/12/18 20:47:16 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:40:02 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			ft_atoi(const char *str)
 	int		rtn;
 	int		neg;
 
-	shift = atoi_shift((char*) str);
+	shift = atoi_shift((char*)str);
 	i = 0;
 	mul = 1;
 	rtn = 0;

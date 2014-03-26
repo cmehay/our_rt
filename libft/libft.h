@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/19 16:05:29 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/14 14:24:45 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:51:59 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,9 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdint.h>
-
-typedef enum	e_bool
-{
-	FALSE,
-	TRUE
-}				t_bool;
+# include "libft_structs.h"
 
 # define BUFF_SIZE 200
-
-typedef struct	s_strlen
-{
-	size_t	s1;
-	size_t	s2;
-}				t_strlen;
-
-typedef struct	s_alloc_lst
-{
-	ssize_t				ptr;
-	struct s_alloc_lst	*next;
-}				t_alloc_lst;
-
-typedef struct		s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct	s_list	*next;
-}					t_list;
 
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);

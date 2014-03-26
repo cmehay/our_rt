@@ -1,9 +1,9 @@
 { cam: x(far/near) y(right/left) z(up/down) ; vectx vecty vectz ; angle_x angle_y angle_z }
-cam       -100 0 0       0 0 0       0 -90 0
+cam       -100 0 0       0 0 0       0 0 0
 
-width 800
+width 1600
 height 800
-anti-aliasing 0
+anti-aliasing 2
 
 { obj: x(sback/front) y(right/left) z(up/down) radius(small/big) ; red green blue ; angle_x angle_y angle_z }
 sphere -10 -20 -1 5      250 0 0 0 0 0
@@ -20,6 +20,6 @@ iplan	0 1 0 20      50 250 50  0 0 0
 
 { light: -x(back) x=0 middle +x(front) y(right/left) z(up/down) radius(small/big) light  180 -200 -98 0     0 0 0      0 0 0}
 ilight -120 0 0 5 10 0 0 0 0 0
-light -100 -40 10 30 10 0 0 0 0 0
-light -100 50 30  10000 10 0 0 0 0 0
+light -100 -40 10 100 10 0 0 0 0 0
+light -100 50 30  100 10 0 0 0 0 0
 

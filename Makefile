@@ -49,7 +49,7 @@ SRC =	main.c \
 		progress.c
 
 OBJS = $(SCRFILES:.c=.o)
-CC = clang
+CC = gcc
 CFLAGS = -g -Wall -Werror -Wextra -O3
 LDFLAGS = -L libft/ -lft -L/usr/X11/lib -lXext -lX11 -lmlx -lm
 LIBFT = libft/libft.a

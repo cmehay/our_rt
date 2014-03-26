@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/24 17:00:41 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/26 16:11:48 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:28:33 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	set_pos_a_i_s(t_env *e, t_pos *a, t_pos *i, t_pos *s)
 	s->z = e->shadowray.z;
 }
 
-void	lightcylinder(t_env *e, t_data light)
+void		lightcylinder(t_env *e, t_data light)
 {
 	float	len;
 	t_pos	i;
@@ -44,7 +44,7 @@ void	lightcylinder(t_env *e, t_data light)
 	e->normal.y = i.y / len;
 	e->normal.z = i.z / len;
 	scal = (e->normal.x * s.x + e->normal.y * s.y
-		 + e->normal.z * s.z) / (e->ray.len / light.radius);
+		+ e->normal.z * s.z) / (e->ray.len / light.radius);
 	if (scal > 0.2 && light.radius)
 		e->light_bis = fmax(pow(scal * (e->ray.len / light.radius), 60),
 				e->light_bis);
@@ -73,7 +73,7 @@ static void	set_pos_p(t_data *scene, t_pos *p)
 	p->z = scene->pos.z;
 }
 
-int		size_light_on_cyl(t_env *e, t_data *scene, t_data light)
+int			size_light_on_cyl(t_env *e, t_data *scene, t_data light)
 {
 	t_pos	s;
 	t_pos	i;

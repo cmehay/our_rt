@@ -6,13 +6,13 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/24 19:09:21 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/26 15:08:03 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:22:35 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	lightsphere(t_env *e, t_data light)
+void		lightsphere(t_env *e, t_data light)
 {
 	float	len;
 	t_pos	nor;
@@ -35,7 +35,7 @@ void	lightsphere(t_env *e, t_data light)
 	e->light *= scal;
 }
 
-int		size_light_on_sphere(t_env *e, t_data *scene, t_data light)
+int			size_light_on_sphere(t_env *e, t_data *scene, t_data light)
 {
 	e->a = pow((e->shadowray.x), 2) + pow((e->shadowray.y), 2)
 		+ pow((e->shadowray.z), 2);
@@ -65,7 +65,7 @@ static int	set_light_color(t_env *e, float min, t_data light)
 	return (1);
 }
 
-int		get_light_to_print(t_env *e, t_data light)
+int			get_light_to_print(t_env *e, t_data light)
 {
 	float	inter;
 	float	inter2;

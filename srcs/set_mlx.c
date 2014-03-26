@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 07:09:38 by sde-segu          #+#    #+#             */
-/*   Updated: 2014/03/23 20:20:27 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:31:20 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	set_mlx_struct(t_env *e)
 	t_size	dsp;
 	t_size	render;
 
-
 	dsp = e->screen.display;
 	render = e->screen.render;
 	e->mlx = (t_mlx*)safe_malloc(sizeof(t_mlx));
@@ -44,7 +43,7 @@ static void	set_mlx_struct(t_env *e)
 		&(e->mlx->bpp), &(e->mlx->line), &(e->mlx->endian));
 }
 
-int		set_mlx(t_env *e, t_data *scene)
+int			set_mlx(t_env *e, t_data *scene)
 {
 	set_screen(e);
 	set_mlx_struct(e);

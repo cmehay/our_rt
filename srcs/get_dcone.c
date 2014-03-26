@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_dcone.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcouly <dcouly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/26 19:37:47 by dcouly            #+#    #+#             */
-/*   Updated: 2014/03/26 19:47:08 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:14:11 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static float	rt_cal_rot(t_data *scene, t_env *e, float min_i)
 	return (inter_z);
 }
 
-static void	rt_assign(t_env *e, t_data *scene, float min_i)
+static void		rt_assign(t_env *e, t_data *scene, float min_i)
 {
 	e->angle_ob.x = scene->angle.x;
 	e->angle_ob.y = scene->angle.y;
@@ -62,7 +62,7 @@ static float	rt_cal_inter(float *inter1, float *inter2, t_env *e)
 	return (min_i);
 }
 
-int			get_dcone_to_print(t_env *e, t_data *scene)
+int				get_dcone_to_print(t_env *e, t_data *scene)
 {
 	float	min_i;
 	float	inter1;

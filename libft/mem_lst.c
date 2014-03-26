@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/29 11:23:20 by cmehay            #+#    #+#             */
-/*   Updated: 2014/03/15 20:35:56 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:46:27 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ static t_alloc_lst	*gimme_ptr_lst(t_bool reset)
 	return (lst);
 }
 
-/*
-** This function adds a pointer address to the list.
-*/
 t_bool				add_to_lst(void *ptr)
 {
 	t_alloc_lst	*new_item;
@@ -48,9 +45,6 @@ t_bool				add_to_lst(void *ptr)
 	return (TRUE);
 }
 
-/*
-** This function allocates memory and adds pointer address to a list.
-*/
 void				*cool_malloc(size_t len)
 {
 	void	*alloc;
@@ -65,9 +59,6 @@ void				*cool_malloc(size_t len)
 	return (alloc);
 }
 
-/*
-** This function frees the ptr only if it sets on the list.
-*/
 void				cool_free(void *ptr)
 {
 	t_alloc_lst	*lst;
@@ -97,9 +88,6 @@ void				cool_free(void *ptr)
 	}
 }
 
-/*
-** This function frees all allocated memory
-*/
 void				free_for_all(t_alloc_lst *lst)
 {
 	if (!lst)

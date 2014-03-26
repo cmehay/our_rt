@@ -6,7 +6,7 @@
 /*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 14:49:13 by cmehay            #+#    #+#             */
-/*   Updated: 2013/11/23 08:52:02 by cmehay           ###   ########.fr       */
+/*   Updated: 2014/03/26 21:41:11 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_memccpy(void *s1, const void *s2, int c, size_t n)
 	{
 		*s1_cp = s2_cp[i];
 		s1_cp++;
-		if (s2_cp[i++] == (unsigned char) c)
+		if (s2_cp[i++] == (unsigned char)c)
 			return (s1_cp);
 	}
 	return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_demi_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcouly <dcouly@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmehay <cmehay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/03/25 15:11:27 by dcouly            #+#    #+#             */
-/*   Updated: 2014/03/26 18:41:44 by dcouly           ###   ########.fr       */
+/*   Updated: 2014/03/26 22:10:31 by cmehay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,13 @@ static t_pos	rt_init(t_pos *a, t_data *scene, t_pos *v, t_env *e)
 	return (o);
 }
 
-void		rt_dcylinder(t_env *e, t_data *scene)
+void			rt_dcylinder(t_env *e, t_data *scene)
 {
 	t_pos	v;
 	t_pos	o;
 	t_pos	a;
-	t_pos	x;
 
 	o = rt_init(&a, scene, &v, e);
-	x.x = scene->angle.x;
-	x.y = scene->angle.y;
-	x.z = scene->angle.z;
 	rt_rotate_x(&a, &v, &o, e);
 	rt_rotate_y(&a, &v, &o, e);
 	rt_rotate_z(&a, &v, &o, e);
@@ -56,7 +52,7 @@ void		rt_dcylinder(t_env *e, t_data *scene)
 		get_dcyl_to_print(e, scene);
 }
 
-static void	rt_init_bis(t_pos *a, t_pos *s, t_pos *i, t_env *e)
+static void		rt_init_bis(t_pos *a, t_pos *s, t_pos *i, t_env *e)
 {
 	a->x = e->angle[0];
 	a->y = -e->angle[1];
@@ -69,7 +65,7 @@ static void	rt_init_bis(t_pos *a, t_pos *s, t_pos *i, t_env *e)
 	rt_rotate_z(a, i, s, e);
 }
 
-void		lightdcylinder(t_env *e, t_data light)
+void			lightdcylinder(t_env *e, t_data light)
 {
 	float	len;
 	t_pos	i;
@@ -88,7 +84,7 @@ void		lightdcylinder(t_env *e, t_data light)
 	e->normal.y = i.y / len;
 	e->normal.z = i.z / len;
 	scal = (e->normal.x * s.x + e->normal.y * s.y
-		 + e->normal.z * s.z) / (e->ray.len / light.radius);
+		+ e->normal.z * s.z) / (e->ray.len / light.radius);
 	if (scal > 0.2 && light.radius)
 		e->light_bis = fmax(pow(scal * (e->ray.len / light.radius), 60),
 				e->light_bis);
@@ -97,7 +93,7 @@ void		lightdcylinder(t_env *e, t_data light)
 	e->light *= scal;
 }
 
-int			size_light_on_dcyl(t_env *e, t_data *scene, t_data light)
+int				size_light_on_dcyl(t_env *e, t_data *scene, t_data light)
 {
 	t_pos	s;
 	t_pos	i;
